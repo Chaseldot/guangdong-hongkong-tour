@@ -1,0 +1,144 @@
+/* 地图样式美化统一 */
+
+/* 地图容器样式 */
+.map-svg {
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+/* 地图轮廓美化 */
+.map-outline, .map-outline-hk-island, .map-outline-kowloon {
+    fill: #f3f3f3;
+    stroke: #ccc;
+    stroke-width: 1.5;
+    transition: all 0.3s ease;
+}
+
+/* 水域美化 */
+.river, .harbor, .coast {
+    fill: #e1f6fd;
+    stroke: #abd9e9;
+    stroke-width: 5;
+    opacity: 0.8;
+}
+
+/* 景点标记点美化 */
+.map-marker[data-category="attraction"] circle {
+    fill: #e74c3c;
+    r: 12;
+    stroke: white;
+    stroke-width: 2;
+    transition: all 0.2s ease;
+}
+
+/* 餐厅标记点美化 */
+.map-marker[data-category="restaurant"] circle {
+    fill: #3498db;
+    r: 8;
+    stroke: white;
+    stroke-width: 2;
+    transition: all 0.2s ease;
+}
+
+/* 住宿标记点美化 */
+.map-marker[data-category="hotel"] circle {
+    fill: #2ecc71;
+    r: 8;
+    stroke: white;
+    stroke-width: 2;
+    transition: all 0.2s ease;
+}
+
+/* 交通标记点美化 */
+.map-marker[data-category="transport"] circle {
+    fill: #f39c12;
+    r: 8;
+    stroke: white;
+    stroke-width: 2;
+    transition: all 0.2s ease;
+}
+
+/* 地区名称样式美化 */
+text[font-style="italic"] {
+    font-family: 'Microsoft YaHei', sans-serif;
+    font-weight: 600;
+    fill: #666;
+    text-shadow: 0 1px 0 white;
+}
+
+/* 标记点文本美化 */
+.map-marker text {
+    font-family: 'Microsoft YaHei', sans-serif;
+    font-weight: normal;
+}
+
+.map-marker[data-category="attraction"] text {
+    font-size: 14px;
+    fill: #333;
+}
+
+.map-marker[data-category="restaurant"] text,
+.map-marker[data-category="hotel"] text,
+.map-marker[data-category="transport"] text {
+    font-size: 12px;
+    fill: #555;
+}
+
+/* 路线美化 */
+.route-path {
+    fill: none;
+    stroke: #9b59b6;
+    stroke-width: 3;
+    stroke-dasharray: 5,5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.8;
+}
+
+/* 点击交互效果 */
+.map-marker {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.map-marker:hover circle {
+    transform: scale(1.2);
+    transform-origin: center;
+}
+
+/* 城市纹理效果 */
+.city-pattern {
+    opacity: 0.3;
+}
+
+/* 高德地图图标提示 */
+.amap-icon-tip {
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    z-index: 100;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+/* 适配移动设备 */
+@media screen and (max-width: 768px) {
+    .map-svg {
+        max-height: 500px;
+    }
+    
+    .map-marker text {
+        font-size: 10px;
+    }
+} 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>旅行地图 - 广东香港六日游</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="map-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -138,208 +139,266 @@
                     <!-- Day 2 地图 -->
                     <div class="map-svg" id="day2-map" style="display: none;">
                         <svg width="100%" height="100%" viewBox="0 0 800 600">
-                            <!-- 广州地图轮廓 - 简化版 -->
-                            <path class="map-outline" d="M100,100 L700,100 L700,500 L100,500 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
-                            <!-- 广州主要河流 - 简化珠江 -->
-                            <path class="river" d="M100,300 Q400,250 700,350" fill="none" stroke="#a5d7f7" stroke-width="10"></path>
+                            <!-- 广州地图轮廓 - 优化版 -->
+                            <path class="map-outline" d="M100,100 C150,80 250,70 350,75 C450,80 550,100 650,120 C700,130 730,180 750,250 C770,320 760,400 730,470 C700,540 650,560 550,580 C450,600 350,590 250,570 C150,550 100,500 80,450 C60,400 50,350 60,300 C70,250 80,180 100,100 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            
+                            <!-- 广州主要河流 - 优化珠江 -->
+                            <path class="river" d="M100,300 C180,280 250,290 320,270 C380,250 440,240 500,250 C560,260 620,280 680,270 C730,260 760,280 780,300" fill="none" stroke="#a5d7f7" stroke-width="8" opacity="0.8"></path>
+                            
+                            <!-- 背景城市纹理 -->
+                            <pattern id="city-pattern-day2" patternUnits="userSpaceOnUse" width="50" height="50" patternTransform="rotate(45)">
+                                <rect width="50" height="50" fill="#f9f9f9"/>
+                                <path d="M0,0 L10,0 L10,10 L0,10 Z" fill="#f0f0f0"/>
+                            </pattern>
+                            <rect x="100" y="100" width="650" height="400" fill="url(#city-pattern-day2)" class="city-pattern"/>
+                            
+                            <!-- 地区名称 -->
+                            <text x="350" y="140" font-size="20" text-anchor="middle" fill="#888" font-weight="bold">广州市</text>
+                            <text x="270" y="200" font-size="12" fill="#666" font-style="italic">越秀区</text>
+                            <text x="420" y="200" font-size="12" fill="#666" font-style="italic">天河区</text>
+                            <text x="170" y="350" font-size="12" fill="#666" font-style="italic">荔湾区</text>
                             
                             <!-- 景点标记 -->
-                            <g class="map-marker" id="marker-chenfamily" data-category="attraction">
+                            <g class="map-marker" id="marker-chenfamily" data-category="attraction" data-name="陈家祠" data-coords="113.253349,23.130042">
                                 <circle cx="250" cy="250" r="10" fill="#e74c3c"></circle>
                                 <text x="270" y="255" font-size="14">陈家祠</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-shangxiajiu" data-category="attraction">
+                            <g class="map-marker" id="marker-shangxiajiu" data-category="attraction" data-name="上下九步行街" data-coords="113.245862,23.12298">
                                 <circle cx="300" cy="300" r="10" fill="#e74c3c"></circle>
                                 <text x="320" y="305" font-size="14">上下九步行街</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-beijinglu" data-category="attraction">
+                            <g class="map-marker" id="marker-beijinglu" data-category="attraction" data-name="北京路步行街" data-coords="113.280751,23.123474">
                                 <circle cx="450" cy="320" r="10" fill="#e74c3c"></circle>
                                 <text x="470" y="325" font-size="14">北京路步行街</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-gzmuseum" data-category="attraction">
+                            <g class="map-marker" id="marker-gzmuseum" data-category="attraction" data-name="广州博物馆" data-coords="113.258501,23.124701">
                                 <circle cx="490" cy="280" r="10" fill="#e74c3c"></circle>
                                 <text x="510" y="285" font-size="14">广州博物馆</text>
                             </g>
                             
                             <!-- 餐厅标记 -->
-                            <g class="map-marker" id="marker-lianxiang" data-category="restaurant">
+                            <g class="map-marker" id="marker-lianxiang" data-category="restaurant" data-name="莲香楼" data-coords="113.267279,23.125127">
                                 <circle cx="270" cy="220" r="8" fill="#3498db"></circle>
                                 <text x="290" y="225" font-size="12">莲香楼</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-panxi" data-category="restaurant">
+                            <g class="map-marker" id="marker-panxi" data-category="restaurant" data-name="泮溪酒家" data-coords="113.270186,23.128995">
                                 <circle cx="350" cy="280" r="8" fill="#3498db"></circle>
                                 <text x="370" y="285" font-size="12">泮溪酒家</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-guangzhourest" data-category="restaurant">
+                            <g class="map-marker" id="marker-guangzhourest" data-category="restaurant" data-name="广州酒家" data-coords="113.269941,23.119395">
                                 <circle cx="430" cy="350" r="8" fill="#3498db"></circle>
                                 <text x="450" y="355" font-size="12">广州酒家</text>
                             </g>
                             
                             <!-- 住宿标记 -->
-                            <g class="map-marker" id="marker-hotel-day2" data-category="hotel">
+                            <g class="map-marker" id="marker-hotel-day2" data-category="hotel" data-name="天河区酒店">
                                 <circle cx="420" cy="200" r="8" fill="#2ecc71"></circle>
                                 <text x="440" y="205" font-size="12">天河区酒店</text>
                             </g>
                             
-                            <!-- 推荐路线 -->
-                            <path class="route-path" d="M420,200 L270,220 L250,250 L300,300 L350,280 L450,320 L490,280 L430,350 L420,200" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5"></path>
+                            <!-- 推荐路线 - 优化平滑的曲线 -->
+                            <path class="route-path" d="M420,200 C380,210 320,215 270,220 C260,230 250,240 250,250 C260,275 280,290 300,300 C325,290 340,280 350,280 C380,300 410,310 450,320 C470,300 480,290 490,280 C470,310 450,330 430,350 C425,300 423,250 420,200" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
                     </div>
                     
                     <!-- Day 3 地图 -->
                     <div class="map-svg" id="day3-map" style="display: none;">
                         <svg width="100%" height="100%" viewBox="0 0 800 600">
-                            <!-- 中山地图轮廓 - 简化版 -->
-                            <path class="map-outline" d="M150,150 L650,150 L650,450 L150,450 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            <!-- 中山地图轮廓 - 优化版 -->
+                            <path class="map-outline" d="M150,150 C200,130 300,120 400,125 C500,130 570,150 650,180 C680,200 690,250 680,300 C670,350 650,400 610,430 C570,460 500,460 400,450 C300,440 220,410 180,370 C150,340 140,290 140,250 C140,210 130,170 150,150 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
                             
-                            <!-- 中山主要河流简化 -->
-                            <path class="river" d="M200,300 Q400,320 600,280" fill="none" stroke="#a5d7f7" stroke-width="8"></path>
+                            <!-- 中山主要河流 - 优化版 -->
+                            <path class="river" d="M170,300 C230,310 290,305 350,300 C410,295 470,290 530,300 C580,310 620,315 670,300" fill="#e1f6fd" stroke="#abd9e9" stroke-width="5" opacity="0.8"></path>
+                            
+                            <!-- 背景城市纹理 -->
+                            <pattern id="city-pattern-day3" patternUnits="userSpaceOnUse" width="50" height="50" patternTransform="rotate(45)">
+                                <rect width="50" height="50" fill="#f9f9f9"/>
+                                <path d="M0,0 L10,0 L10,10 L0,10 Z" fill="#f0f0f0"/>
+                            </pattern>
+                            <rect x="150" y="150" width="500" height="300" fill="url(#city-pattern-day3)" class="city-pattern"/>
+                            
+                            <!-- 地区名称 -->
+                            <text x="400" y="190" font-size="20" text-anchor="middle" fill="#888" font-weight="bold">中山市</text>
+                            <text x="350" y="240" font-size="12" fill="#666" font-style="italic">石岐区</text>
+                            <text x="320" y="360" font-size="12" fill="#666" font-style="italic">翠亨区</text>
                             
                             <!-- 景点标记 -->
-                            <g class="map-marker" id="marker-sunhome" data-category="attraction">
+                            <g class="map-marker" id="marker-sunhome" data-category="attraction" data-name="孙中山故居" data-coords="113.419602,22.466564">
                                 <circle cx="350" cy="280" r="10" fill="#e74c3c"></circle>
                                 <text x="370" y="285" font-size="14">孙中山故居</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-sunmemorial" data-category="attraction">
+                            <g class="map-marker" id="marker-sunmemorial" data-category="attraction" data-name="孙中山纪念堂" data-coords="113.287306,23.135956">
                                 <circle cx="400" cy="250" r="10" fill="#e74c3c"></circle>
                                 <text x="420" y="255" font-size="14">孙中山纪念堂</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-cuiheng" data-category="attraction">
+                            <g class="map-marker" id="marker-cuiheng" data-category="attraction" data-name="翠亨村" data-coords="113.418872,22.464925">
                                 <circle cx="320" cy="320" r="10" fill="#e74c3c"></circle>
                                 <text x="340" y="325" font-size="14">翠亨村</text>
                             </g>
                             
                             <!-- 餐厅标记 -->
-                            <g class="map-marker" id="marker-cuihengrest" data-category="restaurant">
+                            <g class="map-marker" id="marker-cuihengrest" data-category="restaurant" data-name="翠亨邨餐厅" data-coords="113.419602,22.466564">
                                 <circle cx="360" cy="320" r="8" fill="#3498db"></circle>
                                 <text x="380" y="325" font-size="12">翠亨邨餐厅</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-nanyuan" data-category="restaurant">
+                            <g class="map-marker" id="marker-nanyuan" data-category="restaurant" data-name="南苑酒家" data-coords="113.419987,22.467312">
                                 <circle cx="450" cy="300" r="8" fill="#3498db"></circle>
                                 <text x="470" y="305" font-size="12">南苑酒家</text>
                             </g>
                             
                             <!-- 住宿标记 -->
-                            <g class="map-marker" id="marker-hotel-day3" data-category="hotel">
+                            <g class="map-marker" id="marker-hotel-day3" data-category="hotel" data-name="中山石岐区酒店">
                                 <circle cx="480" cy="250" r="8" fill="#2ecc71"></circle>
                                 <text x="500" y="255" font-size="12">中山石岐区酒店</text>
                             </g>
                             
                             <!-- 交通标记 -->
-                            <g class="map-marker" id="marker-zhongshan-station" data-category="transport">
+                            <g class="map-marker" id="marker-zhongshan-station" data-category="transport" data-name="中山站" data-coords="113.399449,22.51997">
                                 <circle cx="500" cy="350" r="8" fill="#f39c12"></circle>
                                 <text x="520" y="355" font-size="12">中山站</text>
                             </g>
                             
-                            <!-- 推荐路线 -->
-                            <path class="route-path" d="M500,350 L350,280 L320,320 L360,320 L400,250 L450,300 L480,250" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5"></path>
+                            <!-- 推荐路线 - 优化平滑曲线 -->
+                            <path class="route-path" d="M500,350 C450,320 400,300 350,280 C330,290 325,305 320,320 C335,320 350,320 360,320 C375,285 390,265 400,250 C420,270 435,285 450,300 C465,275 475,265 480,250" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
                     </div>
 
                     <!-- Day 4 地图 -->
                     <div class="map-svg" id="day4-map" style="display: none;">
                         <svg width="100%" height="100%" viewBox="0 0 800 600">
-                            <!-- 深圳地图轮廓 - 简化版 -->
-                            <path class="map-outline" d="M100,150 L700,150 L700,450 L100,450 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            <!-- 深圳地图轮廓 - 优化版 -->
+                            <path class="map-outline" d="M100,150 C170,140 250,135 350,140 C450,145 550,160 650,180 C690,195 700,230 700,280 C700,330 690,370 650,400 C610,430 540,440 450,445 C350,450 250,445 170,420 C120,400 100,350 100,300 C100,250 80,160 100,150 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
                             
-                            <!-- 深圳海岸线简化 -->
-                            <path class="coast" d="M100,400 Q250,420 400,400 Q550,380 700,420" fill="none" stroke="#a5d7f7" stroke-width="8"></path>
+                            <!-- 深圳海岸线 - 优化版 -->
+                            <path class="coast" d="M100,400 C180,410 250,415 320,407 C390,400 460,395 530,400 C590,405 650,410 700,420" fill="#e1f6fd" stroke="#abd9e9" stroke-width="5" opacity="0.8"></path>
+                            
+                            <!-- 背景城市纹理 -->
+                            <pattern id="city-pattern-day4" patternUnits="userSpaceOnUse" width="50" height="50" patternTransform="rotate(45)">
+                                <rect width="50" height="50" fill="#f9f9f9"/>
+                                <path d="M0,0 L10,0 L10,10 L0,10 Z" fill="#f0f0f0"/>
+                            </pattern>
+                            <rect x="100" y="150" width="600" height="300" fill="url(#city-pattern-day4)" class="city-pattern"/>
+                            
+                            <!-- 地区名称 -->
+                            <text x="400" y="180" font-size="20" text-anchor="middle" fill="#888" font-weight="bold">深圳市</text>
+                            <text x="300" y="220" font-size="12" fill="#666" font-style="italic">南山区</text>
+                            <text x="450" y="250" font-size="12" fill="#666" font-style="italic">福田区</text>
+                            <text x="250" y="350" font-size="12" fill="#666" font-style="italic">蛇口</text>
                             
                             <!-- 景点标记 -->
-                            <g class="map-marker" id="marker-window-world" data-category="attraction">
+                            <g class="map-marker" id="marker-window-world" data-category="attraction" data-name="深圳世界之窗" data-coords="113.979471,22.536728">
                                 <circle cx="300" cy="280" r="10" fill="#e74c3c"></circle>
                                 <text x="320" y="285" font-size="14">深圳世界之窗</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-happy-valley" data-category="attraction">
+                            <g class="map-marker" id="marker-happy-valley" data-category="attraction" data-name="欢乐谷" data-coords="114.058727,22.544511">
                                 <circle cx="350" cy="260" r="10" fill="#e74c3c"></circle>
                                 <text x="370" y="265" font-size="14">欢乐谷</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-huaqiang" data-category="attraction">
+                            <g class="map-marker" id="marker-huaqiang" data-category="attraction" data-name="华强北" data-coords="114.093376,22.548414">
                                 <circle cx="450" cy="300" r="10" fill="#e74c3c"></circle>
                                 <text x="470" y="305" font-size="14">华强北</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-seaworld" data-category="attraction">
+                            <g class="map-marker" id="marker-seaworld" data-category="attraction" data-name="海上世界" data-coords="113.921485,22.479845">
                                 <circle cx="250" cy="370" r="10" fill="#e74c3c"></circle>
                                 <text x="270" y="375" font-size="14">海上世界</text>
                             </g>
                             
                             <!-- 餐厅标记 -->
-                            <g class="map-marker" id="marker-window-food" data-category="restaurant">
+                            <g class="map-marker" id="marker-window-food" data-category="restaurant" data-name="世界之窗美食广场" data-coords="113.979471,22.536728">
                                 <circle cx="320" cy="300" r="8" fill="#3498db"></circle>
                                 <text x="340" y="305" font-size="12">世界之窗美食广场</text>
                             </g>
                             
-                            <g class="map-marker" id="marker-shenzhen-bay" data-category="restaurant">
+                            <g class="map-marker" id="marker-shenzhen-bay" data-category="restaurant" data-name="深圳湾海鲜餐厅" data-coords="113.939456,22.505329">
                                 <circle cx="400" cy="360" r="8" fill="#3498db"></circle>
                                 <text x="420" y="365" font-size="12">深圳湾海鲜餐厅</text>
                             </g>
                             
                             <!-- 住宿标记 -->
-                            <g class="map-marker" id="marker-hotel-day4" data-category="hotel">
+                            <g class="map-marker" id="marker-hotel-day4" data-category="hotel" data-name="华侨城酒店">
                                 <circle cx="280" cy="240" r="8" fill="#2ecc71"></circle>
                                 <text x="300" y="245" font-size="12">华侨城酒店</text>
                             </g>
                             
                             <!-- 交通标记 -->
-                            <g class="map-marker" id="marker-shenzhen-north" data-category="transport">
+                            <g class="map-marker" id="marker-shenzhen-north" data-category="transport" data-name="深圳北站" data-coords="114.058414,22.60989">
                                 <circle cx="500" cy="200" r="8" fill="#f39c12"></circle>
                                 <text x="520" y="205" font-size="12">深圳北站</text>
                             </g>
                             
-                            <!-- 推荐路线 -->
-                            <path class="route-path" d="M500,200 L280,240 L300,280 L320,300 L350,260 L450,300 L250,370 L400,360 L280,240" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5"></path>
+                            <!-- 推荐路线 - 优化平滑曲线 -->
+                            <path class="route-path" d="M500,200 C430,210 350,230 280,240 C290,255 295,270 300,280 C305,290 315,295 320,300 C330,280 340,270 350,260 C380,280 410,290 450,300 C370,330 310,350 250,370 C300,365 350,360 400,360 C350,320 315,280 280,240" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
                     </div>
 
                     <!-- Day 5 地图 -->
                     <div class="map-svg" id="day5-map" style="display: none;">
                         <svg width="100%" height="100%" viewBox="0 0 800 600">
-                            <!-- 香港地图轮廓 - 简化版 -->
-                            <path class="map-outline-hk-island" d="M400,350 Q450,380 500,350 Q550,320 500,300 Q450,280 400,300 Q350,320 400,350 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
-                            <path class="map-outline-kowloon" d="M300,250 L500,250 L450,300 L350,300 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            <!-- 香港地图轮廓 - 优化版 -->
+                            <path class="map-outline-hk-island" d="M400,350 C420,370 450,380 480,370 C520,360 540,340 520,310 C500,290 470,280 430,290 C390,300 370,320 400,350 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"></path>
+                            <path class="map-outline-kowloon" d="M300,250 C350,240 450,240 500,250 C480,270 470,290 450,300 C420,310 380,310 350,300 C330,280 310,260 300,250 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"></path>
                             
-                            <!-- 维多利亚港 -->
-                            <path class="harbor" d="M350,300 Q400,330 450,300" fill="#a5d7f7" stroke="none"></path>
+                            <!-- 背景城市纹理 -->
+                            <pattern id="city-pattern-day5" patternUnits="userSpaceOnUse" width="40" height="40" patternTransform="rotate(45)">
+                                <rect width="40" height="40" fill="#f9f9f9"/>
+                                <path d="M0,0 L8,0 L8,8 L0,8 Z" fill="#f0f0f0"/>
+                            </pattern>
+                            <path d="M400,350 C420,370 450,380 480,370 C520,360 540,340 520,310 C500,290 470,280 430,290 C390,300 370,320 400,350 Z" fill="url(#city-pattern-day5)" class="city-pattern"></path>
+                            <path d="M300,250 C350,240 450,240 500,250 C480,270 470,290 450,300 C420,310 380,310 350,300 C330,280 310,260 300,250 Z" fill="url(#city-pattern-day5)" class="city-pattern"></path>
+                            
+                            <!-- 维多利亚港 - 优化版 -->
+                            <path class="harbor" d="M350,300 C380,320 420,320 450,300" fill="#e1f6fd" stroke="#abd9e9" stroke-width="4" opacity="0.8"></path>
+                            
+                            <!-- 地区名称 -->
+                            <text x="400" y="190" font-size="20" text-anchor="middle" fill="#888" font-weight="bold">香港</text>
+                            <text x="370" y="270" font-size="12" fill="#666" font-style="italic">九龙</text>
+                            <text x="460" y="330" font-size="12" fill="#666" font-style="italic">香港岛</text>
+                            <text x="420" y="360" font-size="12" fill="#666" font-style="italic">中环</text>
                             
                             <!-- 景点标记 -->
-                            <g class="map-marker" id="marker-victoria-harbor" data-category="attraction">
+                            <g class="map-marker" id="marker-victoria-harbor" data-category="attraction" data-name="维多利亚港" data-coords="114.17134,22.293496">
                                 <circle cx="400" cy="310" r="10" fill="#e74c3c"></circle>
                                 <text x="420" y="315" font-size="14">维多利亚港</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYW5jaG9yIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjUiIHI9IjMiPjwvY2lyY2xlPjxsaW5lIHgxPSIxMiIgeTE9IjIyIiB4Mj0iMTIiIHkyPSI4Ij48L2xpbmU+PHBhdGggZD0iTTUgMTJIOC41QzkuODggMTIgMTEgMTMuMTIgMTEgMTQuNVYxNkMxMSAxNy44OCAxMi4xMiAxOSAxNCAxOVMxNyAxNy44OCAxNyAxNlYxNC41QzE3IDEzLjEyIDE4LjEyIDEyIDE5LjUgMTJIMjIiPjwvcGF0aD48L3N2Zz4=" x="388" y="298" width="24" height="24"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-tsim-promenade" data-category="attraction">
+                            <g class="map-marker" id="marker-tsim-promenade" data-category="attraction" data-name="尖沙咀海滨长廊" data-coords="114.170953,22.2935">
                                 <circle cx="380" cy="290" r="10" fill="#e74c3c"></circle>
                                 <text x="400" y="295" font-size="14">尖沙咀海滨长廊</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItbWFwLXBpbiI+PHBhdGggZD0iTTIxIDEwYzAgNy00LjUgMTItOSAxMnMtOS01LTktMTJhOSA5IDAgMCAxIDE4IDB6Ij48L3BhdGg+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMCIgcj0iMyI+PC9jaXJjbGU+PC9zdmc+" x="368" y="278" width="24" height="24"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-avenue-stars" data-category="attraction">
+                            <g class="map-marker" id="marker-avenue-stars" data-category="attraction" data-name="星光大道" data-coords="114.172826,22.293158">
                                 <circle cx="410" cy="280" r="10" fill="#e74c3c"></circle>
                                 <text x="430" y="285" font-size="14">星光大道</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItc3RhciI+PHBvbHlnb24gcG9pbnRzPSIxMiAyIDE1LjA5IDguMjYgMjIgOS4yNyAxNyAxNC4xNCAxOC4xOCAyMSAxMiAxNy43NyA1LjgyIDIxIDcgMTQuMTQgMiA5LjI3IDguOTEgOC4yNiAxMiAyIj48L3BvbHlnb24+PC9zdmc+" x="398" y="268" width="24" height="24"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-mongkok" data-category="attraction">
+                            <g class="map-marker" id="marker-mongkok" data-category="attraction" data-name="旺角购物区" data-coords="114.170141,22.319023">
                                 <circle cx="350" cy="220" r="10" fill="#e74c3c"></circle>
                                 <text x="370" y="225" font-size="14">旺角购物区</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItc2hvcHBpbmctYmFnIj48cGF0aCBkPSJNNiAyTDMgNnYxNGEyIDIgMCAwIDAgMiAyaDE0YTIgMiAwIDAgMCAyLTJWNmwtMy00eiI+PC9wYXRoPjxsaW5lIHgxPSIzIiB5MT0iNiIgeDI9IjIxIiB5Mj0iNiI+PC9saW5lPjxwYXRoIGQ9Ik0xNiAxMGE0IDQgMCAwIDEtOCAwIj48L3BhdGg+PC9zdmc+" x="338" y="208" width="24" height="24"/>
                             </g>
                             
                             <!-- 餐厅标记 -->
-                            <g class="map-marker" id="marker-dimsum" data-category="restaurant">
+                            <g class="map-marker" id="marker-dimsum" data-category="restaurant" data-name="添好运点心" data-coords="114.169498,22.297437">
                                 <circle cx="330" cy="270" r="8" fill="#3498db"></circle>
                                 <text x="350" y="275" font-size="12">添好运点心</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY29mZmVlIj48cGF0aCBkPSJNMTggOGg1YTIgMiAwIDAgMSAyIDJ2MWEyIDIgMCAwIDEtMiAyaC01Ij48L3BhdGg+PHBhdGggZD0iTTIgOGgxNnY5YTQgNCAwIDAgMS00IDRINmE0IDQgMCAwIDEtNC00VjhaIj48L3BhdGg+PGxpbmUgeDE9IjYiIHkxPSIxIiB4Mj0iNiIgeTI9IjQiPjwvbGluZT48bGluZSB4MT0iMTAiIHkxPSIxIiB4Mj0iMTAiIHkyPSI0Ij48L2xpbmU+PGxpbmUgeDE9IjE0IiB5MT0iMSIgeDI9IjE0IiB5Mj0iNCI+PC9saW5lPjwvc3ZnPg==" x="322" y="262" width="16" height="16"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-yung-kee" data-category="restaurant">
+                            <g class="map-marker" id="marker-yung-kee" data-category="restaurant" data-name="鏞记酒家" data-coords="114.158481,22.284688">
                                 <circle cx="450" cy="330" r="8" fill="#3498db"></circle>
                                 <text x="470" y="335" font-size="12">鏞记酒家</text>
                             </g>
@@ -364,64 +423,87 @@
                     <!-- Day 6 地图 -->
                     <div class="map-svg" id="day6-map" style="display: none;">
                         <svg width="100%" height="100%" viewBox="0 0 800 600">
-                            <!-- 香港地图轮廓 - 简化版 -->
-                            <path class="map-outline-hk-island" d="M400,350 Q450,380 500,350 Q550,320 500,300 Q450,280 400,300 Q350,320 400,350 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
-                            <path class="map-outline-kowloon" d="M300,250 L500,250 L450,300 L350,300 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            <!-- 香港地图轮廓 - 优化版 -->
+                            <path class="map-outline-hk-island" d="M400,350 C420,370 450,380 480,370 C520,360 540,340 520,310 C500,290 470,280 430,290 C390,300 370,320 400,350 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"></path>
+                            <path class="map-outline-kowloon" d="M300,250 C350,240 450,240 500,250 C480,270 470,290 450,300 C420,310 380,310 350,300 C330,280 310,260 300,250 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="1.5"></path>
                             
-                            <!-- 维多利亚港 -->
-                            <path class="harbor" d="M350,300 Q400,330 450,300" fill="#a5d7f7" stroke="none"></path>
+                            <!-- 背景城市纹理 -->
+                            <pattern id="city-pattern-day6" patternUnits="userSpaceOnUse" width="40" height="40" patternTransform="rotate(45)">
+                                <rect width="40" height="40" fill="#f9f9f9"/>
+                                <path d="M0,0 L8,0 L8,8 L0,8 Z" fill="#f0f0f0"/>
+                            </pattern>
+                            <path d="M400,350 C420,370 450,380 480,370 C520,360 540,340 520,310 C500,290 470,280 430,290 C390,300 370,320 400,350 Z" fill="url(#city-pattern-day6)" class="city-pattern"></path>
+                            <path d="M300,250 C350,240 450,240 500,250 C480,270 470,290 450,300 C420,310 380,310 350,300 C330,280 310,260 300,250 Z" fill="url(#city-pattern-day6)" class="city-pattern"></path>
+                            
+                            <!-- 维多利亚港 - 优化版 -->
+                            <path class="harbor" d="M350,300 C380,320 420,320 450,300" fill="#e1f6fd" stroke="#abd9e9" stroke-width="4" opacity="0.8"></path>
+                            
+                            <!-- 地区名称 -->
+                            <text x="400" y="190" font-size="20" text-anchor="middle" fill="#888" font-weight="bold">香港</text>
+                            <text x="370" y="270" font-size="12" fill="#666" font-style="italic">九龙</text>
+                            <text x="460" y="330" font-size="12" fill="#666" font-style="italic">香港岛</text>
+                            <text x="420" y="360" font-size="12" fill="#666" font-style="italic">中环</text>
                             
                             <!-- 景点标记 -->
-                            <g class="map-marker" id="marker-victoria-peak" data-category="attraction">
+                            <g class="map-marker" id="marker-victoria-peak" data-category="attraction" data-name="太平山顶" data-coords="114.149592,22.275931">
                                 <circle cx="430" cy="320" r="10" fill="#e74c3c"></circle>
                                 <text x="450" y="325" font-size="14">太平山顶</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItbW91bnRhaW4iPjxwb2x5Z29uIHBvaW50cz0iOCAxOCAyMSAxOCAxNCAxMCI+PC9wb2x5Z29uPjxwb2x5Z29uIHBvaW50cz0iMyAxNCA4IDE0IDEgNyI+PC9wb2x5Z29uPjwvc3ZnPg==" x="418" y="308" width="24" height="24"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-sky-terrace" data-category="attraction">
+                            <g class="map-marker" id="marker-sky-terrace" data-category="attraction" data-name="凌霄阁摩天台" data-coords="114.149881,22.276291">
                                 <circle cx="450" cy="330" r="10" fill="#e74c3c"></circle>
                                 <text x="470" y="335" font-size="14">凌霄阁摩天台</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxyZWN0IHg9IjMiIHk9IjExIiB3aWR0aD0iMTgiIGhlaWdodD0iMTEiIHJ4PSIyIiByeT0iMiI+PC9yZWN0PjxwYXRoIGQ9Ik03IDE4aC40YzItLjQgNC0uNCAxLjYgMGg0YzItLjQgNC0uNCAxLjYgMGguNCIvPjxwYXRoIGQ9Ik0xIDExbDUgLTkiLz48cGF0aCBkPSJNMjMgMTFsLTUgLTkiLz48cGF0aCBkPSJNMTIgM3Y4Ii8+PC9zdmc+" x="438" y="318" width="24" height="24"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-central" data-category="attraction">
+                            <g class="map-marker" id="marker-central" data-category="attraction" data-name="中环" data-coords="114.158798,22.282382">
                                 <circle cx="420" cy="340" r="10" fill="#e74c3c"></circle>
                                 <text x="440" y="345" font-size="14">中环</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItbWFwLXBpbiI+PHBhdGggZD0iTTIxIDEwYzAgNy00LjUgMTItOSAxMnMtOS01LTktMTJhOSA5IDAgMCAxIDE4IDB6Ij48L3BhdGg+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMCIgcj0iMyI+PC9jaXJjbGU+PC9zdmc+" x="408" y="328" width="24" height="24"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-lan-kwai-fong" data-category="attraction">
+                            <g class="map-marker" id="marker-lan-kwai-fong" data-category="attraction" data-name="兰桂坊" data-coords="114.155265,22.280668">
                                 <circle cx="410" cy="350" r="10" fill="#e74c3c"></circle>
                                 <text x="430" y="355" font-size="14">兰桂坊</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItbXVzaWMiPjxwYXRoIGQ9Ik05IDE4VjVsLTIgMkw5IDE4YzAtNi42MiAyLjg4LTEyIDE4LTEydjEyYzUgNSAxLjUgMTAtNSAxMC01LTItOC01LTEyLTEweiI+PC9wYXRoPjwvc3ZnPg==" x="398" y="338" width="24" height="24"/>
                             </g>
                             
                             <!-- 餐厅标记 -->
-                            <g class="map-marker" id="marker-cafe-australia" data-category="restaurant">
+                            <g class="map-marker" id="marker-cafe-australia" data-category="restaurant" data-name="澳洲牛奶公司" data-coords="114.159882,22.281388">
                                 <circle cx="390" cy="320" r="8" fill="#3498db"></circle>
                                 <text x="410" y="325" font-size="12">澳洲牛奶公司</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY29mZmVlIj48cGF0aCBkPSJNMTggOGg1YTIgMiAwIDAgMSAyIDJ2MWEyIDIgMCAwIDEtMiAyaC01Ij48L3BhdGg+PHBhdGggZD0iTTIgOGgxNnY5YTQgNCAwIDAgMS00IDRINmE0IDQgMCAwIDEtNC00VjhaIj48L3BhdGg+PGxpbmUgeDE9IjYiIHkxPSIxIiB4Mj0iNiIgeTI9IjQiPjwvbGluZT48bGluZSB4MT0iMTAiIHkxPSIxIiB4Mj0iMTAiIHkyPSI0Ij48L2xpbmU+PGxpbmUgeDE9IjE0IiB5MT0iMSIgeDI9IjE0IiB5Mj0iNCI+PC9saW5lPjwvc3ZnPg==" x="382" y="312" width="16" height="16"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-peak-restaurant" data-category="restaurant">
+                            <g class="map-marker" id="marker-peak-restaurant" data-category="restaurant" data-name="太平山顶餐厅" data-coords="114.149592,22.275931">
                                 <circle cx="460" cy="310" r="8" fill="#3498db"></circle>
                                 <text x="480" y="315" font-size="12">太平山顶餐厅</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY29mZmVlIj48cGF0aCBkPSJNMTggOGg1YTIgMiAwIDAgMSAyIDJ2MWEyIDIgMCAwIDEtMiAyaC01Ij48L3BhdGg+PHBhdGggZD0iTTIgOGgxNnY5YTQgNCAwIDAgMS00IDRINmE0IDQgMCAwIDEtNC00VjhaIj48L3BhdGg+PGxpbmUgeDE9IjYiIHkxPSIxIiB4Mj0iNiIgeTI9IjQiPjwvbGluZT48bGluZSB4MT0iMTAiIHkxPSIxIiB4Mj0iMTAiIHkyPSI0Ij48L2xpbmU+PGxpbmUgeDE9IjE0IiB5MT0iMSIgeDI9IjE0IiB5Mj0iNCI+PC9saW5lPjwvc3ZnPg==" x="452" y="302" width="16" height="16"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-lan-kwai-food" data-category="restaurant">
+                            <g class="map-marker" id="marker-lan-kwai-food" data-category="restaurant" data-name="兰桂坊美食" data-coords="114.155265,22.280668">
                                 <circle cx="400" cy="360" r="8" fill="#3498db"></circle>
                                 <text x="420" y="365" font-size="12">兰桂坊美食</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY29mZmVlIj48cGF0aCBkPSJNMTggOGg1YTIgMiAwIDAgMSAyIDJ2MWEyIDIgMCAwIDEtMiAyaC01Ij48L3BhdGg+PHBhdGggZD0iTTIgOGgxNnY5YTQgNCAwIDAgMS00IDRINmE0IDQgMCAwIDEtNC00VjhaIj48L3BhdGg+PGxpbmUgeDE9IjYiIHkxPSIxIiB4Mj0iNiIgeTI9IjQiPjwvbGluZT48bGluZSB4MT0iMTAiIHkxPSIxIiB4Mj0iMTAiIHkyPSI0Ij48L2xpbmU+PGxpbmUgeDE9IjE0IiB5MT0iMSIgeDI9IjE0IiB5Mj0iNCI+PC9saW5lPjwvc3ZnPg==" x="392" y="352" width="16" height="16"/>
                             </g>
                             
                             <!-- 住宿标记 -->
-                            <g class="map-marker" id="marker-hotel-day6" data-category="hotel">
+                            <g class="map-marker" id="marker-hotel-day6" data-category="hotel" data-name="尖沙咀酒店" data-coords="114.171753,22.296466">
                                 <circle cx="370" cy="260" r="8" fill="#2ecc71"></circle>
                                 <text x="390" y="265" font-size="12">尖沙咀酒店</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItaG9tZSI+PHBhdGggZD0iTTMgOWwxOC05IDE4IDl2MTNhMiAyIDAgMCAxLTIgMkgxMG0xOC0yYTIgMiAwIDAgMS0yIDJINmEyIDIgMCAwIDEtMi0yVjlaIj48L3BhdGg+PHBvbHlsaW5lIHBvaW50cz0iOSAyMiA5IDEyIDE1IDEyIDE1IDIyIj48L3BvbHlsaW5lPjwvc3ZnPg==" x="362" y="252" width="16" height="16"/>
                             </g>
                             
                             <!-- 交通标记 -->
-                            <g class="map-marker" id="marker-peak-tram" data-category="transport">
+                            <g class="map-marker" id="marker-peak-tram" data-category="transport" data-name="山顶缆车站" data-coords="114.151729,22.277578">
                                 <circle cx="410" cy="330" r="8" fill="#f39c12"></circle>
                                 <text x="430" y="335" font-size="12">山顶缆车站</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItdHJhaW4iPjxyZWN0IHg9IjQiIHk9IjIiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgcng9IjIiIHJ5PSIyIj48L3JlY3Q+PHBhdGggZD0iTTQgMTFoMTYiPjwvcGF0aD48cGF0aCBkPSJNMTIgMnYxNiI+PC9wYXRoPjwvc3ZnPg==" x="402" y="322" width="16" height="16"/>
                             </g>
                             
-                            <!-- 推荐路线 -->
-                            <path class="route-path" d="M370,260 L390,320 L410,330 L430,320 L450,330 L460,310 L420,340 L410,350 L400,360" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5"></path>
+                            <!-- 推荐路线 - 优化平滑曲线 -->
+                            <path class="route-path" d="M370,260 C375,280 385,300 390,320 C395,325 400,328 410,330 C415,325 420,323 430,320 C440,325 445,328 450,330 C455,325 458,315 460,310 C445,320 430,330 420,340 C418,345 415,348 410,350 C408,355 405,358 400,360" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
                     </div>
 
