@@ -8,6 +8,8 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
     margin-bottom: 20px;
+    transform-origin: center;
+    transition: transform 0.3s ease;
 }
 
 /* 地图轮廓美化 */
@@ -141,4 +143,44 @@ text[font-style="italic"] {
     .map-marker text {
         font-size: 10px;
     }
+}
+
+/* 解决香港地图标记点拥挤问题 */
+#day5-map .map-marker text,
+#day6-map .map-marker text {
+    font-size: 11px;
+    text-anchor: start;
+}
+
+#day5-map .map-marker[data-category="attraction"] circle,
+#day6-map .map-marker[data-category="attraction"] circle {
+    r: 8;
+}
+
+#day5-map .map-marker[data-category="restaurant"] circle,
+#day6-map .map-marker[data-category="restaurant"] circle,
+#day5-map .map-marker[data-category="hotel"] circle,
+#day6-map .map-marker[data-category="hotel"] circle,
+#day5-map .map-marker[data-category="transport"] circle,
+#day6-map .map-marker[data-category="transport"] circle {
+    r: 6;
+}
+
+/* 优化香港地图图标尺寸 */
+#day5-map .map-marker image,
+#day6-map .map-marker image {
+    transform: scale(0.8);
+    transform-origin: center;
+}
+
+/* 优化地图文本间距，防止文字重叠 */
+#day5-map .map-marker text,
+#day6-map .map-marker text {
+    dominant-baseline: middle;
+    letter-spacing: -0.5px;
+}
+
+/* 增强地图交互式缩放控件效果 */
+.map-controls {
+    opacity: 0.9;
 } 

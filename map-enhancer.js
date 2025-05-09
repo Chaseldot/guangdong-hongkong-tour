@@ -213,4 +213,271 @@ document.addEventListener('DOMContentLoaded', function() {
     enhanceMapOutlines();
     
     console.log('地图增强功能已加载！');
-}); 
+
+    // 初始化地图交互功能
+    initMapTabs();
+    initMapFilters();
+    initMapMarkers();
+    initMapZoom();
+    initMapHighlight();
+    initAMapLinks();
+    
+    // 解决香港地图Day 5和Day 6拥挤问题的特殊优化
+    optimizeHongKongMaps();
+});
+
+// 实现地图标签切换
+function initMapTabs() {
+    const mapTabs = document.querySelectorAll('.map-tab');
+    const mapSvgs = document.querySelectorAll('.map-svg');
+    const timelines = document.querySelectorAll('.timeline');
+
+    mapTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const day = this.getAttribute('data-day');
+            
+            // 移除所有活动标签
+            mapTabs.forEach(t => t.classList.remove('active'));
+            // 添加当前活动标签
+            this.classList.add('active');
+            
+            // 隐藏所有地图
+            mapSvgs.forEach(svg => svg.style.display = 'none');
+            // 显示当前地图
+            document.getElementById(`day${day}-map`).style.display = 'block';
+            
+            // 隐藏所有时间线
+            timelines.forEach(timeline => timeline.style.display = 'none');
+            // 显示当前时间线
+            document.getElementById(`day${day}-timeline`).style.display = 'block';
+        });
+    });
+}
+
+// 实现地图筛选功能
+function initMapFilters() {
+    const mapFilters = document.querySelectorAll('.map-filter');
+    
+    mapFilters.forEach(filter => {
+        filter.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            
+            // 移除所有活动筛选器
+            mapFilters.forEach(f => f.classList.remove('active'));
+            // 添加当前活动筛选器
+            this.classList.add('active');
+            
+            // 获取所有标记点
+            const markers = document.querySelectorAll('.map-marker');
+            
+            // 显示/隐藏相应的标记点
+            if (category === 'all') {
+                markers.forEach(marker => marker.style.display = 'block');
+            } else {
+                markers.forEach(marker => {
+                    if (marker.getAttribute('data-category') === category) {
+                        marker.style.display = 'block';
+                    } else {
+                        marker.style.display = 'none';
+                    }
+                });
+            }
+        });
+    });
+}
+
+// 实现地图标记点交互
+function initMapMarkers() {
+    const mapMarkers = document.querySelectorAll('.map-marker');
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    // 点击地图标记点时高亮对应的时间线项
+    mapMarkers.forEach(marker => {
+        marker.addEventListener('click', function() {
+            const id = this.id;
+            
+            timelineItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-marker-id') === id) {
+                    item.classList.add('active');
+                    item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        });
+    });
+    
+    // 点击时间线项时高亮对应的地图标记点
+    timelineItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const markerId = this.getAttribute('data-marker-id');
+            
+            timelineItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 找到对应的标记点并添加临时高亮效果
+            const marker = document.getElementById(markerId);
+            if (marker) {
+                // 添加临时动画效果
+                const circle = marker.querySelector('circle');
+                if (circle) {
+                    circle.setAttribute('data-original-r', circle.getAttribute('r'));
+                    circle.setAttribute('r', parseInt(circle.getAttribute('r')) * 1.5);
+                    
+                    setTimeout(() => {
+                        circle.setAttribute('r', circle.getAttribute('data-original-r'));
+                    }, 1000);
+                }
+            }
+        });
+    });
+}
+
+// 实现地图缩放功能
+function initMapZoom() {
+    const zoomIn = document.querySelector('.zoom-in');
+    const zoomOut = document.querySelector('.zoom-out');
+    const zoomReset = document.querySelector('.zoom-reset');
+    const mapSvgs = document.querySelectorAll('.map-svg');
+    
+    // 存储每个地图的当前缩放级别
+    const zoomLevels = {};
+    mapSvgs.forEach(svg => {
+        zoomLevels[svg.id] = 1;
+    });
+    
+    zoomIn.addEventListener('click', function() {
+        const activeMap = document.querySelector('.map-svg[style*="display: block"]');
+        if (activeMap) {
+            zoomLevels[activeMap.id] *= 1.2;
+            activeMap.style.transform = `scale(${zoomLevels[activeMap.id]})`;
+        }
+    });
+    
+    zoomOut.addEventListener('click', function() {
+        const activeMap = document.querySelector('.map-svg[style*="display: block"]');
+        if (activeMap) {
+            zoomLevels[activeMap.id] /= 1.2;
+            activeMap.style.transform = `scale(${zoomLevels[activeMap.id]})`;
+        }
+    });
+    
+    zoomReset.addEventListener('click', function() {
+        const activeMap = document.querySelector('.map-svg[style*="display: block"]');
+        if (activeMap) {
+            zoomLevels[activeMap.id] = 1;
+            activeMap.style.transform = 'scale(1)';
+        }
+    });
+}
+
+// 添加时间线与地图的联动高亮效果
+function initMapHighlight() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    timelineItems.forEach(item => {
+        // 鼠标悬停在时间线项上时，高亮对应的地图标记点
+        item.addEventListener('mouseenter', function() {
+            const markerId = this.getAttribute('data-marker-id');
+            const marker = document.getElementById(markerId);
+            
+            if (marker) {
+                const circle = marker.querySelector('circle');
+                if (circle) {
+                    circle.setAttribute('data-original-fill', circle.getAttribute('fill'));
+                    circle.setAttribute('fill', '#ff9500');
+                    circle.setAttribute('stroke-width', '3');
+                }
+            }
+        });
+        
+        // 鼠标离开时恢复原样
+        item.addEventListener('mouseleave', function() {
+            const markerId = this.getAttribute('data-marker-id');
+            const marker = document.getElementById(markerId);
+            
+            if (marker) {
+                const circle = marker.querySelector('circle');
+                if (circle) {
+                    circle.setAttribute('fill', circle.getAttribute('data-original-fill'));
+                    circle.setAttribute('stroke-width', '2');
+                }
+            }
+        });
+    });
+}
+
+// 优化香港地图（Day 5和Day 6）以解决拥挤问题
+function optimizeHongKongMaps() {
+    // 为Day 5和Day 6的地图添加额外的缩放比例
+    const hkMaps = document.querySelectorAll('#day5-map, #day6-map');
+    
+    hkMaps.forEach(map => {
+        // 为地图设置稍大的初始显示区域
+        const svg = map.querySelector('svg');
+        if (svg) {
+            svg.setAttribute('viewBox', '150 150 500 300');
+        }
+        
+        // 优化标记点之间的间距，防止重叠
+        const markers = map.querySelectorAll('.map-marker');
+        markers.forEach((marker, index) => {
+            // 根据类别调整标记点文本的位置
+            const text = marker.querySelector('text');
+            const category = marker.getAttribute('data-category');
+            
+            if (text) {
+                // 根据索引交错排列文本方向，减少重叠
+                if (index % 2 === 0) {
+                    text.setAttribute('text-anchor', 'end');
+                    text.setAttribute('x', parseInt(text.getAttribute('x')) - 30);
+                }
+            }
+        });
+    });
+}
+
+// 实现高德地图链接功能
+function initAMapLinks() {
+    const mapMarkers = document.querySelectorAll('.map-marker[data-coords]');
+    
+    mapMarkers.forEach(marker => {
+        marker.addEventListener('click', function() {
+            const coords = this.getAttribute('data-coords');
+            const name = this.getAttribute('data-name');
+            
+            if (coords) {
+                // 创建高德地图链接提示
+                showAmapTip(name);
+                
+                // 双击时打开高德地图
+                marker.addEventListener('dblclick', function(e) {
+                    e.preventDefault();
+                    const amapUrl = `https://uri.amap.com/marker?position=${coords}&name=${name}`;
+                    window.open(amapUrl, '_blank');
+                });
+            }
+        });
+    });
+}
+
+// 显示高德地图提示
+function showAmapTip(name) {
+    // 检查是否已存在提示
+    let tip = document.querySelector('.amap-icon-tip');
+    
+    if (!tip) {
+        // 创建提示元素
+        tip = document.createElement('div');
+        tip.className = 'amap-icon-tip';
+        document.body.appendChild(tip);
+    }
+    
+    // 更新提示内容和显示
+    tip.textContent = `双击可在高德地图中查看"${name}"`;
+    tip.style.opacity = '1';
+    
+    // 3秒后隐藏提示
+    setTimeout(() => {
+        tip.style.opacity = '0';
+    }, 3000);
+} 
