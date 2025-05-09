@@ -55,48 +55,83 @@
             <div class="map-container">
                 <div class="map-svg-container">
                     <!-- Day 1 地图 -->
-                    <div class="map-svg" id="day1-map" style="display: block;">
+                    <div class="map-svg" id="day1-map">
                         <svg width="100%" height="100%" viewBox="0 0 800 600">
-                            <!-- 广州地图轮廓 - 简化版 -->
-                            <path class="map-outline" d="M100,100 L700,100 L700,500 L100,500 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
-                            <!-- 广州主要河流 - 简化珠江 -->
-                            <path class="river" d="M100,300 Q400,250 700,350" fill="none" stroke="#a5d7f7" stroke-width="10"></path>
+                            <!-- 广州地图轮廓 - 优化版 -->
+                            <path class="map-outline" d="M100,100 C150,80 250,70 350,75 C450,80 550,100 650,120 C700,130 730,180 750,250 C770,320 760,400 730,470 C700,540 650,560 550,580 C450,600 350,590 250,570 C150,550 100,500 80,450 C60,400 50,350 60,300 C70,250 80,180 100,100 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
                             
-                            <!-- 景点标记 -->
-                            <g class="map-marker" id="marker-gz-tower" data-category="attraction">
-                                <circle cx="400" cy="250" r="10" fill="#e74c3c"></circle>
-                                <text x="420" y="255" font-size="14">广州塔</text>
+                            <!-- 广州主要河流 - 优化版珠江 -->
+                            <path class="river" d="M90,300 C150,290 200,310 250,290 C300,270 350,260 400,250 C450,240 500,230 550,240 C600,250 650,270 700,260 C750,250 780,280 790,320" fill="none" stroke="#a5d7f7" stroke-width="8" opacity="0.8"></path>
+                            
+                            <!-- 背景城市纹理 -->
+                            <pattern id="city-pattern" patternUnits="userSpaceOnUse" width="50" height="50" patternTransform="rotate(45)">
+                                <rect width="50" height="50" fill="#f9f9f9"/>
+                                <path d="M0,0 L10,0 L10,10 L0,10 Z" fill="#f0f0f0"/>
+                            </pattern>
+                            <rect x="100" y="100" width="650" height="400" fill="url(#city-pattern)" opacity="0.3"/>
+                            
+                            <!-- 地区名称 -->
+                            <text x="400" y="140" font-size="20" text-anchor="middle" fill="#888" font-weight="bold">广州市</text>
+                            
+                            <!-- 景点标记 - 使用更美观的图标 -->
+                            <g class="map-marker" id="marker-gz-tower" data-category="attraction" data-name="广州塔（小蛮腰）" data-coords="113.330904,23.113901">
+                                <circle cx="400" cy="300" r="12" fill="#e74c3c"></circle>
+                                <text x="420" y="300" font-size="14">广州塔（小蛮腰）</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItbWFwLXBpbiI+PHBhdGggZD0iTTIxIDEwYzAgNy00LjUgMTItOSAxMnMtOS01LTktMTJhOSA5IDAgMCAxIDE4IDB6Ij48L3BhdGg+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMCIgcj0iMyI+PC9jaXJjbGU+PC9zdmc+" x="388" y="288" width="24" height="24"/>
+                                <!-- 高德地图小图标 -->
+                                <image href="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUxNS41NTI1IDk2Mi41NmMtNS43ODU2IDAtMTEuNDY4OC0xLjk0NTYtMTYuMDc2OC01LjczNDRMODcuNDQ5NiA2NzQuMzA0Yy0zNS44NC0yOC42NzItNy4wNjU2LTgzLjc2MzIgMzguMDkyOC03My4wMTEyIDg5LjQ5NzYgMjEuNDA2NyAyNDQuMDcwNCAxMC44NTQ0IDE5OS4wNjU2LTE0MS41Njc5LTIyLjkzNzYtNzcuNzIxNi0yMi45ODg4LTE1NS41NDU2LTAuMTUzNi0yMzMuMjY3MiA4My45NjgtMjg2LjAwNDIgMzA2Ljc5MDQtMzI0LjE5ODQgNTIxLjQyMDgtODkuMDg4IDE0Ni41MzQ0IDE2MC4xNTM2IDExNi4yMjQgNDA0LjYzMzYtNjguODE2IDU1Mi44NTc2LTY1LjEyNjQgNTIuMDcwNC0xMzYuMzk2OCA5MS4xMzYtMjEyLjk5MiAxMTYuMDE2LTEzLjIwOTYgNC4zMDA4LTI0LjU3NiAxOS41MDcyLTI0LjU3NiAzMy4xMjY0djg2LjMyNzljMCAxOS4yIC0xNS41NTIgMzQuODU3Ni0zNC42MTEyIDM0Ljg1NzZ6IiBmaWxsPSIjMDA4RDM4Ij48L3BhdGg+PC9zdmc+" x="435" y="295" width="18" height="18" class="amap-icon"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-shamian" data-category="attraction">
-                                <circle cx="250" cy="320" r="10" fill="#e74c3c"></circle>
-                                <text x="270" y="325" font-size="14">沙面岛</text>
+                            <g class="map-marker" id="marker-shamian" data-category="attraction" data-name="沙面岛" data-coords="113.242513,23.107123">
+                                <circle cx="240" cy="320" r="12" fill="#e74c3c"></circle>
+                                <text x="260" y="320" font-size="14">沙面岛</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItbWFwLXBpbiI+PHBhdGggZD0iTTIxIDEwYzAgNy00LjUgMTItOSAxMnMtOS01LTktMTJhOSA5IDAgMCAxIDE4IDB6Ij48L3BhdGg+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMCIgcj0iMyI+PC9jaXJjbGU+PC9zdmc+" x="228" y="308" width="24" height="24"/>
+                                <!-- 高德地图小图标 -->
+                                <image href="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUxNS41NTI1IDk2Mi41NmMtNS43ODU2IDAtMTEuNDY4OC0xLjk0NTYtMTYuMDc2OC01LjczNDRMODcuNDQ5NiA2NzQuMzA0Yy0zNS44NC0yOC42NzItNy4wNjU2LTgzLjc2MzIgMzguMDkyOC03My4wMTEyIDg5LjQ5NzYgMjEuNDA2NyAyNDQuMDcwNCAxMC44NTQ0IDE5OS4wNjU2LTE0MS41Njc5LTIyLjkzNzYtNzcuNzIxNi0yMi45ODg4LTE1NS41NDU2LTAuMTUzNi0yMzMuMjY3MiA4My45NjgtMjg2LjAwNDIgMzA2Ljc5MDQtMzI0LjE5ODQgNTIxLjQyMDgtODkuMDg4IDE0Ni41MzQ0IDE2MC4xNTM2IDExNi4yMjQgNDA0LjYzMzYtNjguODE2IDU1Mi44NTc2LTY1LjEyNjQgNTIuMDcwNC0xMzYuMzk2OCA5MS4xMzYtMjEyLjk5MiAxMTYuMDE2LTEzLjIwOTYgNC4zMDA4LTI0LjU3NiAxOS41MDcyLTI0LjU3NiAzMy4xMjY0djg2LjMyNzljMCAxOS4yIC0xNS41NTIgMzQuODU3Ni0zNC42MTEyIDM0Ljg1NzZ6IiBmaWxsPSIjMDA4RDM4Ij48L3BhdGg+PC9zdmc+" x="272" y="315" width="18" height="18" class="amap-icon"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-pearlriver" data-category="attraction">
-                                <circle cx="350" cy="330" r="10" fill="#e74c3c"></circle>
-                                <text x="370" y="335" font-size="14">珠江夜游</text>
+                            <g class="map-marker" id="marker-pearl-river" data-category="attraction" data-name="珠江夜游" data-coords="113.321503,23.118443">
+                                <circle cx="320" cy="270" r="12" fill="#e74c3c"></circle>
+                                <text x="340" y="270" font-size="14">珠江夜游</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItYW5jaG9yIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjUiIHI9IjMiPjwvY2lyY2xlPjxsaW5lIHgxPSIxMiIgeTE9IjIyIiB4Mj0iMTIiIHkyPSI4Ij48L2xpbmU+PHBhdGggZD0iTTUgMTJIOC41QzkuODggMTIgMTEgMTMuMTIgMTEgMTQuNVYxNkMxMSAxNy44OCAxMi4xMiAxOSAxNCAxOVMxNyAxNy44OCAxNyAxNlYxNC41QzE3IDEzLjEyIDE4LjEyIDEyIDE5LjUgMTJIMjIiPjwvcGF0aD48L3N2Zz4=" x="308" y="258" width="24" height="24"/>
+                                <!-- 高德地图小图标 -->
+                                <image href="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUxNS41NTI1IDk2Mi41NmMtNS43ODU2IDAtMTEuNDY4OC0xLjk0NTYtMTYuMDc2OC01LjczNDRMODcuNDQ5NiA2NzQuMzA0Yy0zNS44NC0yOC42NzItNy4wNjU2LTgzLjc2MzIgMzguMDkyOC03My4wMTEyIDg5LjQ5NzYgMjEuNDA2NyAyNDQuMDcwNCAxMC44NTQ0IDE5OS4wNjU2LTE0MS41Njc5LTIyLjkzNzYtNzcuNzIxNi0yMi45ODg4LTE1NS41NDU2LTAuMTUzNi0yMzMuMjY3MiA4My45NjgtMjg2LjAwNDIgMzA2Ljc5MDQtMzI0LjE5ODQgNTIxLjQyMDgtODkuMDg4IDE0Ni41MzQ0IDE2MC4xNTM2IDExNi4yMjQgNDA0LjYzMzYtNjguODE2IDU1Mi44NTc2LTY1LjEyNjQgNTIuMDcwNC0xMzYuMzk2OCA5MS4xMzYtMjEyLjk5MiAxMTYuMDE2LTEzLjIwOTYgNC4zMDA4LTI0LjU3NiAxOS41MDcyLTI0LjU3NiAzMy4xMjY0djg2LjMyNzljMCAxOS4yIC0xNS41NTIgMzQuODU3Ni0zNC42MTEyIDM0Ljg1NzZ6IiBmaWxsPSIjMDA4RDM4Ij48L3BhdGg+PC9zdmc+" x="350" y="265" width="18" height="18" class="amap-icon"/>
                             </g>
                             
-                            <!-- 餐厅标记 -->
-                            <g class="map-marker" id="marker-chentianji" data-category="restaurant">
-                                <circle cx="300" cy="280" r="8" fill="#3498db"></circle>
-                                <text x="320" y="285" font-size="12">陈添记</text>
+                            <!-- 餐厅标记 - 使用更精细的图标 -->
+                            <g class="map-marker" id="marker-tianhe-food" data-category="restaurant" data-name="陈添记">
+                                <circle cx="480" cy="350" r="8" fill="#3498db"></circle>
+                                <text x="500" y="350" font-size="12">陈添记（煲仔饭）</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY29mZmVlIj48cGF0aCBkPSJNMTggOGg1YTIgMiAwIDAgMSAyIDJ2MWEyIDIgMCAwIDEtMiAyaC01Ij48L3BhdGg+PHBhdGggZD0iTTIgOGgxNnY5YTQgNCAwIDAgMS00IDRINmE0IDQgMCAwIDEtNC00VjhaIj48L3BhdGg+PGxpbmUgeDE9IjYiIHkxPSIxIiB4Mj0iNiIgeTI9IjQiPjwvbGluZT48bGluZSB4MT0iMTAiIHkxPSIxIiB4Mj0iMTAiIHkyPSI0Ij48L2xpbmU+PGxpbmUgeDE9IjE0IiB5MT0iMSIgeDI9IjE0IiB5Mj0iNCI+PC9saW5lPjwvc3ZnPg==" x="471" y="341" width="18" height="18"/>
                             </g>
                             
-                            <g class="map-marker" id="marker-bingsheng" data-category="restaurant">
-                                <circle cx="450" cy="290" r="8" fill="#3498db"></circle>
-                                <text x="470" y="295" font-size="12">炳胜品味</text>
+                            <g class="map-marker" id="marker-bingsheng" data-category="restaurant" data-name="炳胜品味">
+                                <circle cx="370" cy="390" r="8" fill="#3498db"></circle>
+                                <text x="390" y="390" font-size="12">炳胜品味（顺德菜）</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItY29mZmVlIj48cGF0aCBkPSJNMTggOGg1YTIgMiAwIDAgMSAyIDJ2MWEyIDIgMCAwIDEtMiAyaC01Ij48L3BhdGg+PHBhdGggZD0iTTIgOGgxNnY5YTQgNCAwIDAgMS00IDRINmE0IDQgMCAwIDEtNC00VjhaIj48L3BhdGg+PGxpbmUgeDE9IjYiIHkxPSIxIiB4Mj0iNiIgeTI9IjQiPjwvbGluZT48bGluZSB4MT0iMTAiIHkxPSIxIiB4Mj0iMTAiIHkyPSI0Ij48L2xpbmU+PGxpbmUgeDE9IjE0IiB5MT0iMSIgeDI9IjE0IiB5Mj0iNCI+PC9saW5lPjwvc3ZnPg==" x="361" y="381" width="18" height="18"/>
                             </g>
                             
                             <!-- 住宿标记 -->
-                            <g class="map-marker" id="marker-hotel-day1" data-category="hotel">
-                                <circle cx="420" cy="200" r="8" fill="#2ecc71"></circle>
-                                <text x="440" y="205" font-size="12">天河区酒店</text>
+                            <g class="map-marker" id="marker-hotel-day1" data-category="hotel" data-name="珠江新城酒店">
+                                <circle cx="430" cy="230" r="8" fill="#2ecc71"></circle>
+                                <text x="450" y="230" font-size="12">珠江新城酒店</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItaG9tZSI+PHBhdGggZD0iTTMgOWwxOC05IDE4IDl2MTNhMiAyIDAgMCAxLTIgMkgxMG0xOC0yYTIgMiAwIDAgMS0yIDJINmEyIDIgMCAwIDEtMi0yVjlaIj48L3BhdGg+PHBvbHlsaW5lIHBvaW50cz0iOSAyMiA5IDEyIDE1IDEyIDE1IDIyIj48L3BvbHlsaW5lPjwvc3ZnPg==" x="421" y="221" width="18" height="18"/>
                             </g>
                             
-                            <!-- 推荐路线 -->
-                            <path class="route-path" d="M420,200 L400,250 L300,280 L250,320 L350,330 L450,290 L420,200" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5"></path>
+                            <!-- 交通标记 -->
+                            <g class="map-marker" id="marker-gz-south" data-category="transport" data-name="广州南站" data-coords="113.269868,22.988416">
+                                <circle cx="180" cy="470" r="8" fill="#f39c12"></circle>
+                                <text x="200" y="470" font-size="12">广州南站</text>
+                                <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJmZWF0aGVyIGZlYXRoZXItdHJhaW4iPjxyZWN0IHg9IjQiIHk9IjIiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgcng9IjIiIHJ5PSIyIj48L3JlY3Q+PHBhdGggZD0iTTQgMTFoMTYiPjwvcGF0aD48cGF0aCBkPSJNMTIgMnYxNiI+PC9wYXRoPjwvc3ZnPg==" x="171" y="461" width="18" height="18"/>
+                            </g>
+                            
+                            <!-- 推荐路线 - 优化平滑的曲线 -->
+                            <path class="route-path" d="M180,470 C250,400 300,300 320,270 C340,250 370,230 400,300 C420,350 360,370 240,320 C280,350 320,380 370,390 C420,400 470,370 480,350 C490,330 450,250 430,230" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            
+                            <!-- 区域标注 -->
+                            <text x="270" y="200" font-size="12" fill="#666" font-style="italic">天河区</text>
+                            <text x="170" y="350" font-size="12" fill="#666" font-style="italic">荔湾区</text>
+                            <text x="450" y="420" font-size="12" fill="#666" font-style="italic">海珠区</text>
                         </svg>
                     </div>
 
@@ -791,7 +826,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>© 2023 粤港之旅 版权所有</p>
+                <p>© 2025 粤港之旅 大叔版权所有</p>
             </div>
         </div>
     </footer>

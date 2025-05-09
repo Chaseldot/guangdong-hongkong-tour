@@ -40,6 +40,256 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
 
+    // 增强所有页面的地图跳转功能
+    // 1. 通用地图跳转函数
+    function openAmapLocation(locationName, coordinates) {
+        // 如果没有提供坐标，使用地名进行搜索
+        if (!coordinates) {
+            window.open(`https://uri.amap.com/search?keyword=${encodeURIComponent(locationName)}&src=mypage`);
+            return;
+        }
+        
+        // 移动设备尝试打开APP
+        if (isMobile) {
+            let mapUrl;
+            if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // iOS设备
+                mapUrl = `iosamap://viewMap?sourceApplication=粤港之旅&poiname=${encodeURIComponent(locationName)}&lat=${coordinates.split(',')[1]}&lon=${coordinates.split(',')[0]}&dev=0`;
+            } else {
+                // Android设备
+                mapUrl = `androidamap://viewMap?sourceApplication=粤港之旅&poiname=${encodeURIComponent(locationName)}&lat=${coordinates.split(',')[1]}&lon=${coordinates.split(',')[0]}&dev=0`;
+            }
+            
+            // 添加提示信息
+            const mapOpenHint = document.createElement('div');
+            mapOpenHint.className = 'map-open-hint';
+            mapOpenHint.textContent = '正在打开高德地图...';
+            mapOpenHint.style.position = 'fixed';
+            mapOpenHint.style.top = '50%';
+            mapOpenHint.style.left = '50%';
+            mapOpenHint.style.transform = 'translate(-50%, -50%)';
+            mapOpenHint.style.padding = '10px 20px';
+            mapOpenHint.style.backgroundColor = 'rgba(0,0,0,0.7)';
+            mapOpenHint.style.color = 'white';
+            mapOpenHint.style.borderRadius = '30px';
+            mapOpenHint.style.zIndex = '1000';
+            document.body.appendChild(mapOpenHint);
+            
+            // 尝试打开APP
+            window.location.href = mapUrl;
+            
+            // 设置延时，如果APP未打开，则跳转到网页版
+            setTimeout(function() {
+                window.location.href = `https://uri.amap.com/marker?position=${coordinates}&name=${encodeURIComponent(locationName)}`;
+                document.body.removeChild(mapOpenHint);
+            }, 2000);
+        } else {
+            // 非移动设备直接打开网页版
+            window.open(`https://uri.amap.com/marker?position=${coordinates}&name=${encodeURIComponent(locationName)}`);
+        }
+    }
+
+    // 2. 为地图页的所有标记添加点击事件
+    const mapMarkers = document.querySelectorAll('.map-marker');
+    if (mapMarkers.length > 0) {
+        const locationCoordinates = {
+            // 广州
+            '广州塔': '113.330904,23.113901',
+            '沙面岛': '113.242513,23.107123',
+            '珠江夜游': '113.321503,23.118443',
+            '陈家祠': '113.253349,23.130042',
+            '上下九步行街': '113.245862,23.12298',
+            '北京路步行街': '113.280751,23.123474',
+            '广州博物馆': '113.258501,23.124701',
+            // 中山
+            '孙中山故居': '113.419602,22.466564',
+            '孙中山纪念堂': '113.287306,23.135956',
+            '翠亨村': '113.418872,22.464925',
+            // 深圳
+            '深圳世界之窗': '113.979471,22.536728',
+            '欢乐谷': '114.058727,22.544511',
+            '华强北': '114.093376,22.548414',
+            '海上世界': '113.921485,22.479845',
+            // 香港
+            '维多利亚港': '114.17134,22.293496',
+            '尖沙咀海滨长廊': '114.170953,22.2935',
+            '星光大道': '114.172826,22.293158',
+            '旺角购物区': '114.170141,22.319023',
+            '太平山顶': '114.15004,22.271383',
+            '凌霄阁摩天台': '114.150085,22.271437',
+            '中环': '114.15803,22.281874',
+            '兰桂坊': '114.154988,22.280785',
+            // 餐厅
+            '莲香楼': '113.267279,23.125127',
+            '泮溪酒家': '113.270186,23.128995',
+            '广州酒家': '113.269941,23.119395',
+            '翠亨邨餐厅': '113.419602,22.466564',
+            '南苑酒家': '113.419987,22.467312',
+            '世界之窗美食广场': '113.979471,22.536728',
+            '深圳湾海鲜餐厅': '113.939456,22.505329',
+            // 交通
+            '广州南站': '113.269868,22.988416',
+            '中山站': '113.399449,22.51997',
+            '深圳北站': '114.058414,22.60989',
+            '福田口岸': '114.071892,22.522657',
+            '罗湖口岸': '114.119841,22.533153'
+        };
+        
+        mapMarkers.forEach(marker => {
+            marker.style.cursor = 'pointer';
+            
+            marker.addEventListener('click', function() {
+                const markerId = this.id;
+                const locationName = this.querySelector('text').textContent.trim();
+                const coordinates = locationCoordinates[locationName] || null;
+                
+                openAmapLocation(locationName, coordinates);
+            });
+        });
+    }
+
+    // 3. 为所有行程卡片中的景点名称添加点击事件
+    const attractionTitles = document.querySelectorAll('.attraction h5');
+    if (attractionTitles.length > 0) {
+        attractionTitles.forEach(title => {
+            title.style.cursor = 'pointer';
+            title.style.color = 'var(--primary-color)';
+            title.style.textDecoration = 'underline';
+            title.style.textDecorationColor = 'transparent';
+            title.style.transition = 'all 0.3s ease';
+            
+            title.addEventListener('mouseover', function() {
+                this.style.textDecorationColor = 'var(--primary-color)';
+            });
+            
+            title.addEventListener('mouseout', function() {
+                this.style.textDecorationColor = 'transparent';
+            });
+            
+            title.addEventListener('click', function() {
+                const locationName = this.textContent.trim();
+                const locationCoordinates = {
+                    '广州塔（小蛮腰）': '113.330904,23.113901',
+                    '沙面岛': '113.242513,23.107123',
+                    '珠江夜游': '113.321503,23.118443',
+                    '陈家祠': '113.253349,23.130042',
+                    '上下九步行街': '113.245862,23.12298',
+                    '北京路步行街': '113.280751,23.123474',
+                    '广州博物馆': '113.258501,23.124701',
+                    '孙中山故居纪念馆': '113.419602,22.466564',
+                    '孙中山纪念堂': '113.287306,23.135956',
+                    '翠亨村': '113.418872,22.464925',
+                    '深圳世界之窗': '113.979471,22.536728',
+                    '欢乐谷': '114.058727,22.544511',
+                    '华强北': '114.093376,22.548414',
+                    '海上世界': '113.921485,22.479845',
+                    '维多利亚港': '114.17134,22.293496',
+                    '尖沙咀海滨长廊': '114.170953,22.2935',
+                    '星光大道': '114.172826,22.293158',
+                    '旺角购物区': '114.170141,22.319023',
+                    '太平山顶': '114.15004,22.271383',
+                    '凌霄阁摩天台': '114.150085,22.271437',
+                    '中环': '114.15803,22.281874',
+                    '兰桂坊': '114.154988,22.280785'
+                };
+                
+                openAmapLocation(locationName, locationCoordinates[locationName]);
+            });
+        });
+    }
+
+    // 4. 为时间线项目添加高德地图跳转
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    if (timelineItems.length > 0) {
+        timelineItems.forEach(item => {
+            const title = item.querySelector('.timeline-title');
+            if (title) {
+                title.style.cursor = 'pointer';
+                title.style.color = 'var(--primary-color)';
+                title.style.transition = 'all 0.3s ease';
+                
+                title.addEventListener('mouseover', function() {
+                    this.style.textDecoration = 'underline';
+                });
+                
+                title.addEventListener('mouseout', function() {
+                    this.style.textDecoration = 'none';
+                });
+                
+                title.addEventListener('click', function(e) {
+                    e.stopPropagation(); // 防止触发父元素的点击事件
+                    const locationName = this.textContent.trim();
+                    const markerId = item.getAttribute('data-marker-id');
+                    const marker = document.getElementById(markerId);
+                    
+                    // 如果能找到对应的marker，从marker中获取地点名称
+                    let markerLocationName = locationName;
+                    if (marker) {
+                        const markerText = marker.querySelector('text');
+                        if (markerText) {
+                            markerLocationName = markerText.textContent.trim();
+                        }
+                    }
+                    
+                    // 通过地点名称查找坐标
+                    const locationCoordinates = {
+                        // 之前定义的坐标...
+                    };
+                    
+                    openAmapLocation(markerLocationName, locationCoordinates[markerLocationName]);
+                });
+            }
+        });
+    }
+
+    // 5. 为交通图标添加点击事件
+    const transportIcons = document.querySelectorAll('.timeline-transport i');
+    if (transportIcons.length > 0) {
+        transportIcons.forEach(icon => {
+            const transportText = icon.nextSibling;
+            if (transportText && transportText.textContent) {
+                icon.parentElement.style.cursor = 'pointer';
+                
+                icon.parentElement.addEventListener('click', function() {
+                    const transportType = this.textContent.trim();
+                    let searchKeyword = transportType;
+                    
+                    // 从文本中提取地点名称
+                    const transportRegex = /(乘坐|搭乘|前往|到达)(.+?)(站|口岸|机场|码头)/;
+                    const match = transportType.match(transportRegex);
+                    if (match && match[2]) {
+                        searchKeyword = match[2] + match[3];
+                    }
+                    
+                    // 特定交通站点的坐标
+                    const transportCoordinates = {
+                        '广州南站': '113.269868,22.988416',
+                        '广州火车站': '113.258113,23.147784',
+                        '中山站': '113.399449,22.51997',
+                        '深圳北站': '114.058414,22.60989',
+                        '深圳站': '114.117241,22.531894',
+                        '福田口岸': '114.071892,22.522657',
+                        '罗湖口岸': '114.119841,22.533153',
+                        '香港西九龙站': '114.165955,22.304493',
+                        '尖沙咀地铁站': '114.172341,22.298648',
+                        '中环地铁站': '114.158232,22.281982'
+                    };
+                    
+                    // 搜索相应的交通地点
+                    for (const [key, value] of Object.entries(transportCoordinates)) {
+                        if (transportType.includes(key)) {
+                            openAmapLocation(key, value);
+                            return;
+                        }
+                    }
+                    
+                    // 如果没有找到具体坐标，则搜索关键词
+                    openAmapLocation(searchKeyword);
+                });
+            }
+        });
+    }
+
     // 地图页面交互
     if (document.querySelector('.map-tabs')) {
         const mapTabs = document.querySelectorAll('.map-tab');
@@ -136,75 +386,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             const shouldShow = activeFilters.some(f => f.getAttribute('data-category') === markerCategory);
                             marker.style.display = shouldShow ? 'block' : 'none';
                         });
-                    }
-                }
-            });
-        });
-
-        // 地图与时间线联动
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        
-        timelineItems.forEach(item => {
-            item.addEventListener('click', function() {
-                const markerId = this.getAttribute('data-marker-id');
-                const marker = document.getElementById(markerId);
-                
-                // 移除所有活跃时间线项
-                timelineItems.forEach(i => i.classList.remove('active'));
-                
-                // 添加当前活跃状态
-                this.classList.add('active');
-                
-                // 滚动到地图标记位置
-                if (marker) {
-                    // 使标记突出显示
-                    const allMarkers = document.querySelectorAll('.map-marker');
-                    allMarkers.forEach(m => {
-                        m.style.transition = 'all 0.3s ease';
-                        m.style.opacity = '0.4';
-                    });
-                    
-                    marker.style.opacity = '1';
-                    marker.style.transform = 'scale(1.1)';
-                    
-                    // 5秒后恢复所有标记正常显示
-                    setTimeout(() => {
-                        allMarkers.forEach(m => {
-                            m.style.opacity = '1';
-                            m.style.transform = 'scale(1)';
-                        });
-                    }, 5000);
-                    
-                    // 获取SVG上下文以便正确计算位置
-                    const activeSvg = document.querySelector('.map-svg[style*="display: block"]');
-                    if (activeSvg) {
-                        // 在SVG坐标系中计算标记的位置
-                        const markerFirstChild = marker.firstElementChild;
-                        if (markerFirstChild && markerFirstChild.tagName.toLowerCase() === 'circle') {
-                            const cx = parseFloat(markerFirstChild.getAttribute('cx'));
-                            const cy = parseFloat(markerFirstChild.getAttribute('cy'));
-                            
-                            // 获取SVG视图框
-                            const viewBox = activeSvg.querySelector('svg').getAttribute('viewBox').split(' ');
-                            const viewBoxWidth = parseFloat(viewBox[2]);
-                            const viewBoxHeight = parseFloat(viewBox[3]);
-                            
-                            // 计算缩放比例
-                            const svgRect = activeSvg.querySelector('svg').getBoundingClientRect();
-                            const scaleX = svgRect.width / viewBoxWidth;
-                            const scaleY = svgRect.height / viewBoxHeight;
-                            
-                            // 计算中心点偏移
-                            const offsetX = (cx * scaleX) - (svgRect.width / 2);
-                            const offsetY = (cy * scaleY) - (svgRect.height / 2);
-                            
-                            // 平滑滚动到标记位置
-                            activeSvg.scrollTo({
-                                left: offsetX,
-                                top: offsetY,
-                                behavior: 'smooth'
-                            });
-                        }
                     }
                 }
             });
@@ -338,64 +519,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // 景点名称点击事件，在移动端打开高德地图
-        const galleryTitles = document.querySelectorAll('.gallery-title a');
-        
-        galleryTitles.forEach(title => {
-            title.addEventListener('click', function(e) {
-                // 仅在移动设备上执行
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    
-                    const locationName = this.textContent;
-                    const locationCoords = this.getAttribute('data-coords');
-                    
-                    // 尝试打开高德地图APP
-                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                    
-                    if (isMobile) {
-                        // 构建高德地图APP链接
-                        let mapUrl;
-                        
-                        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                            // iOS设备
-                            mapUrl = `iosamap://viewMap?sourceApplication=粤港之旅&poiname=${encodeURIComponent(locationName)}&lat=${locationCoords.split(',')[1]}&lon=${locationCoords.split(',')[0]}&dev=0`;
-                        } else {
-                            // Android设备
-                            mapUrl = `androidamap://viewMap?sourceApplication=粤港之旅&poiname=${encodeURIComponent(locationName)}&lat=${locationCoords.split(',')[1]}&lon=${locationCoords.split(',')[0]}&dev=0`;
-                        }
-                        
-                        // 尝试打开APP
-                        window.location.href = mapUrl;
-                        
-                        // 添加提示信息
-                        const mapOpenHint = document.createElement('div');
-                        mapOpenHint.className = 'map-open-hint';
-                        mapOpenHint.textContent = '正在打开地图...';
-                        mapOpenHint.style.position = 'fixed';
-                        mapOpenHint.style.top = '50%';
-                        mapOpenHint.style.left = '50%';
-                        mapOpenHint.style.transform = 'translate(-50%, -50%)';
-                        mapOpenHint.style.padding = '10px 20px';
-                        mapOpenHint.style.backgroundColor = 'rgba(0,0,0,0.7)';
-                        mapOpenHint.style.color = 'white';
-                        mapOpenHint.style.borderRadius = '30px';
-                        mapOpenHint.style.zIndex = '1000';
-                        document.body.appendChild(mapOpenHint);
-                        
-                        // 设置延时，如果APP未打开，则跳转到网页版
-                        setTimeout(function() {
-                            window.location.href = `https://uri.amap.com/marker?position=${locationCoords}&name=${encodeURIComponent(locationName)}`;
-                            document.body.removeChild(mapOpenHint);
-                        }, 2000);
-                    } else {
-                        // 非移动设备直接打开网页版
-                        window.open(`https://uri.amap.com/marker?position=${locationCoords}&name=${encodeURIComponent(locationName)}`);
-                    }
-                }
-            });
-        });
-        
         // 景点图片点击预览放大效果
         const galleryImages = document.querySelectorAll('.gallery-img-container');
         
