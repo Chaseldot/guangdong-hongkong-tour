@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>景点图鉴 - 广东香港六日游</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="旅游Logo">
+                    <span>粤港之旅</span>
+                </a>
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">行程概览</a></li>
+                    <li><a href="map.html">旅行地图</a></li>
+                    <li><a href="gallery.html" class="active">景点图鉴</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu">
+        <div class="close-btn">
+            <i class="fas fa-times"></i>
+        </div>
+        <ul>
+            <li><a href="index.html">行程概览</a></li>
+            <li><a href="map.html">旅行地图</a></li>
+            <li><a href="gallery.html" class="active">景点图鉴</a></li>
+        </ul>
+    </div>
+
+    <section class="gallery-section">
+        <div class="container">
+            <h2>景点图鉴</h2>
+            <div class="gallery-tabs">
+                <div class="gallery-tab active" data-category="all">全部</div>
+                <div class="gallery-tab" data-category="culture">文化景观</div>
+                <div class="gallery-tab" data-category="nature">自然风光</div>
+                <div class="gallery-tab" data-category="food">美食体验</div>
+                <div class="gallery-tab" data-category="shopping">购物休闲</div>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- 广州塔 -->
+                <div class="gallery-item" data-category="culture">
+                    <div class="gallery-img-container">
+                        <img src="images/gz-tower.jpg" alt="广州塔" class="gallery-img lazy-load" data-src="images/gz-tower.jpg">
+                        <div class="gallery-img-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h4 class="gallery-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="#" data-coords="113.3195,23.1066">广州塔（小蛮腰）</a>
+                        </h4>
+                        <p class="gallery-desc">广州塔高600米，被誉为"小蛮腰"，是广州现代化的象征，于2010年亚运会前竣工。塔上设有多个观景平台，可360度俯瞰珠江两岸风光，还有世界最高的摩天轮和极速云霄等刺激项目。</p>
+                        <div class="gallery-info">
+                            <div class="gallery-info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>门票：¥150</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="far fa-clock"></i>
+                                <span>开放：09:30-22:30</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-map"></i>
+                                <span>地址：广州市阅江西路222号</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span>建议：2-3小时</span>
+                            </div>
+                        </div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">地标建筑</span>
+                            <span class="gallery-tag">观景台</span>
+                            <span class="gallery-tag">现代建筑</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 沙面岛 -->
+                <div class="gallery-item" data-category="culture">
+                    <div class="gallery-img-container">
+                        <img src="images/shamian.jpg" alt="沙面岛" class="gallery-img lazy-load" data-src="images/shamian.jpg">
+                        <div class="gallery-img-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h4 class="gallery-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="#" data-coords="113.2416,23.1071">沙面岛</a>
+                        </h4>
+                        <p class="gallery-desc">沙面岛曾是广州的外国租界，现在保留了众多欧式建筑，是了解广州历史的重要地点。漫步其中，仿佛置身欧洲小镇，是拍照打卡和感受异域风情的绝佳去处。</p>
+                        <div class="gallery-info">
+                            <div class="gallery-info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>门票：免费</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="far fa-clock"></i>
+                                <span>开放：全天</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-map"></i>
+                                <span>地址：广州市荔湾区</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span>建议：2-3小时</span>
+                            </div>
+                        </div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">历史文化</span>
+                            <span class="gallery-tag">建筑群</span>
+                            <span class="gallery-tag">欧式风情</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 孙中山故居 -->
+                <div class="gallery-item" data-category="culture">
+                    <div class="gallery-img-container">
+                        <img src="images/sunyatsen.jpg" alt="孙中山故居" class="gallery-img lazy-load" data-src="images/sunyatsen.jpg">
+                        <div class="gallery-img-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h4 class="gallery-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="#" data-coords="113.4200,22.5197">孙中山故居纪念馆</a>
+                        </h4>
+                        <p class="gallery-desc">孙中山故居是中国近代革命先行者孙中山的诞生地，对中国近代史具有重要意义。这里保存了孙中山先生的许多珍贵史料，是了解中国近代史和民主革命历程的重要场所。</p>
+                        <div class="gallery-info">
+                            <div class="gallery-info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>门票：免费</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="far fa-clock"></i>
+                                <span>开放：9:00-17:30</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-map"></i>
+                                <span>地址：中山市翠亨大道93号</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span>建议：3小时</span>
+                            </div>
+                        </div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">历史遗迹</span>
+                            <span class="gallery-tag">AAAAA景区</span>
+                            <span class="gallery-tag">纪念馆</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 深圳世界之窗 -->
+                <div class="gallery-item" data-category="culture">
+                    <div class="gallery-img-container">
+                        <img src="images/window-world.jpg" alt="深圳世界之窗" class="gallery-img lazy-load" data-src="images/window-world.jpg">
+                        <div class="gallery-img-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h4 class="gallery-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="#" data-coords="113.9735,22.5348">深圳世界之窗</a>
+                        </h4>
+                        <p class="gallery-desc">世界之窗是深圳著名的主题公园，汇集了世界上著名的建筑和景点的微缩景观。在这里可以一天内领略全球各地的著名景点，体验不同国家的文化特色。</p>
+                        <div class="gallery-info">
+                            <div class="gallery-info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>门票：¥200</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="far fa-clock"></i>
+                                <span>开放：10:00-21:00</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-map"></i>
+                                <span>地址：深圳市深南大道9037号</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span>建议：4-5小时</span>
+                            </div>
+                        </div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">主题公园</span>
+                            <span class="gallery-tag">微缩景观</span>
+                            <span class="gallery-tag">异国风情</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 香港维多利亚港 -->
+                <div class="gallery-item" data-category="nature">
+                    <div class="gallery-img-container">
+                        <img src="images/victoria-harbour.jpg" alt="维多利亚港" class="gallery-img lazy-load" data-src="images/victoria-harbour.jpg">
+                        <div class="gallery-img-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h4 class="gallery-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="#" data-coords="114.1702,22.2882">香港维多利亚港</a>
+                        </h4>
+                        <p class="gallery-desc">维多利亚港被誉为世界三大天然良港之一，是香港最著名的风景名胜。这里每晚上演的"幻彩咏香江"灯光秀吸引了无数游客，尖沙咀海滨长廊也是欣赏香港岛天际线的最佳位置。</p>
+                        <div class="gallery-info">
+                            <div class="gallery-info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>门票：免费</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="far fa-clock"></i>
+                                <span>开放：全天</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-map"></i>
+                                <span>地址：香港岛和九龙半岛之间</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span>建议：2-3小时</span>
+                            </div>
+                        </div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">自然风光</span>
+                            <span class="gallery-tag">港口海湾</span>
+                            <span class="gallery-tag">夜景观赏</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 香港太平山顶 -->
+                <div class="gallery-item" data-category="nature">
+                    <div class="gallery-img-container">
+                        <img src="images/victoria-peak.jpg" alt="太平山顶" class="gallery-img lazy-load" data-src="images/victoria-peak.jpg">
+                        <div class="gallery-img-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h4 class="gallery-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="#" data-coords="114.1494,22.2712">香港太平山顶</a>
+                        </h4>
+                        <p class="gallery-desc">太平山顶是香港最受欢迎的观光地点，可俯瞰维多利亚港和香港岛的壮观景色。乘坐山顶缆车登顶，在凌霄阁摩天台欣赏日落和夜景，是香港之行必不可少的体验。</p>
+                        <div class="gallery-info">
+                            <div class="gallery-info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>门票：缆车往返HK$99</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="far fa-clock"></i>
+                                <span>开放：7:30-23:00</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-map"></i>
+                                <span>地址：香港岛中部</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span>建议：3小时</span>
+                            </div>
+                        </div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">观景台</span>
+                            <span class="gallery-tag">自然风光</span>
+                            <span class="gallery-tag">缆车体验</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 上下九步行街 -->
+                <div class="gallery-item" data-category="shopping">
+                    <div class="gallery-img-container">
+                        <img src="images/shangxiajiu.jpg" alt="上下九步行街" class="gallery-img lazy-load" data-src="images/shangxiajiu.jpg">
+                        <div class="gallery-img-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h4 class="gallery-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="#" data-coords="113.2537,23.1162">上下九步行街</a>
+                        </h4>
+                        <p class="gallery-desc">上下九步行街是广州最热闹的传统商业街，汇集了各式老字号和特色小吃。这里保存着岭南传统建筑风格，有许多百年老店，是体验广州本土生活和购买特产的好去处。</p>
+                        <div class="gallery-info">
+                            <div class="gallery-info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>门票：免费</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="far fa-clock"></i>
+                                <span>开放：10:00-22:00</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-map"></i>
+                                <span>地址：广州市荔湾区上下九路</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span>建议：2-3小时</span>
+                            </div>
+                        </div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">购物休闲</span>
+                            <span class="gallery-tag">传统街区</span>
+                            <span class="gallery-tag">小吃美食</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 旺角购物区 -->
+                <div class="gallery-item" data-category="shopping">
+                    <div class="gallery-img-container">
+                        <img src="images/mongkok.jpg" alt="旺角购物区" class="gallery-img lazy-load" data-src="images/mongkok.jpg">
+                        <div class="gallery-img-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h4 class="gallery-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="#" data-coords="114.1694,22.3186">旺角购物区</a>
+                        </h4>
+                        <p class="gallery-desc">旺角是香港最热闹的购物天堂，汇集各类商场、小店和街头小吃。这里的女人街、运动鞋街、电脑中心等各具特色，从高档商品到平价好物应有尽有，是购物爱好者的天堂。</p>
+                        <div class="gallery-info">
+                            <div class="gallery-info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>门票：免费</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="far fa-clock"></i>
+                                <span>开放：12:00-24:00</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-map"></i>
+                                <span>地址：香港九龙旺角区</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span>建议：3-4小时</span>
+                            </div>
+                        </div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">购物天堂</span>
+                            <span class="gallery-tag">特色街区</span>
+                            <span class="gallery-tag">小吃美食</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 广州早茶 -->
+                <div class="gallery-item" data-category="food">
+                    <div class="gallery-img-container">
+                        <img src="images/dimsum.jpg" alt="广州早茶" class="gallery-img lazy-load" data-src="images/dimsum.jpg">
+                        <div class="gallery-img-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h4 class="gallery-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="#" data-coords="113.2672,23.1291">广州早茶文化</a>
+                        </h4>
+                        <p class="gallery-desc">广州早茶是粤式文化的重要组成部分，品种繁多的点心、香浓的功夫茶，以及热闹的茶楼氛围，是体验广州本土生活的最佳方式。推荐莲香楼和陶陶居等百年老字号。</p>
+                        <div class="gallery-info">
+                            <div class="gallery-info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>人均：¥60-80</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="far fa-clock"></i>
+                                <span>时间：7:00-10:30</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-map"></i>
+                                <span>地址：广州市内多家茶楼</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span>建议：1-2小时</span>
+                            </div>
+                        </div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">美食体验</span>
+                            <span class="gallery-tag">粤式点心</span>
+                            <span class="gallery-tag">茶文化</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 香港美食 -->
+                <div class="gallery-item" data-category="food">
+                    <div class="gallery-img-container">
+                        <img src="images/hk-food.jpg" alt="香港美食" class="gallery-img lazy-load" data-src="images/hk-food.jpg">
+                        <div class="gallery-img-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h4 class="gallery-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <a href="#" data-coords="114.1745,22.3192">香港特色美食</a>
+                        </h4>
+                        <p class="gallery-desc">香港是美食天堂，融合了中西方各种美食风格。从米其林星级餐厅到街头小吃，从传统茶餐厅到国际料理，都能在香港找到。鸳鸯奶茶、菠萝包、蛋挞等是不容错过的特色小吃。</p>
+                        <div class="gallery-info">
+                            <div class="gallery-info-item">
+                                <i class="fas fa-ticket-alt"></i>
+                                <span>人均：HK$80-200</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="far fa-clock"></i>
+                                <span>时间：全天</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-map"></i>
+                                <span>地址：香港各区餐厅小吃</span>
+                            </div>
+                            <div class="gallery-info-item">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span>建议：随时体验</span>
+                            </div>
+                        </div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">美食体验</span>
+                            <span class="gallery-tag">港式茶餐厅</span>
+                            <span class="gallery-tag">街头小吃</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="旅游Logo">
+                    <span>粤港之旅</span>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="index.html">行程概览</a></li>
+                        <li><a href="map.html">旅行地图</a></li>
+                        <li><a href="gallery.html">景点图鉴</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2023 粤港之旅 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

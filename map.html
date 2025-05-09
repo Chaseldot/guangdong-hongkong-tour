@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅行地图 - 广东香港六日游</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="旅游Logo">
+                    <span>粤港之旅</span>
+                </a>
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">行程概览</a></li>
+                    <li><a href="map.html" class="active">旅行地图</a></li>
+                    <li><a href="gallery.html">景点图鉴</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu">
+        <div class="close-btn">
+            <i class="fas fa-times"></i>
+        </div>
+        <ul>
+            <li><a href="index.html">行程概览</a></li>
+            <li><a href="map.html" class="active">旅行地图</a></li>
+            <li><a href="gallery.html">景点图鉴</a></li>
+        </ul>
+    </div>
+
+    <section class="map-section">
+        <div class="container">
+            <h2>旅行地图</h2>
+            <div class="map-tabs">
+                <div class="map-tab active" data-day="1">Day 1: 广州</div>
+                <div class="map-tab" data-day="2">Day 2: 广州</div>
+                <div class="map-tab" data-day="3">Day 3: 中山</div>
+                <div class="map-tab" data-day="4">Day 4: 深圳</div>
+                <div class="map-tab" data-day="5">Day 5: 香港</div>
+                <div class="map-tab" data-day="6">Day 6: 香港</div>
+            </div>
+
+            <div class="map-container">
+                <div class="map-svg-container">
+                    <!-- Day 1 地图 -->
+                    <div class="map-svg" id="day1-map" style="display: block;">
+                        <svg width="100%" height="100%" viewBox="0 0 800 600">
+                            <!-- 广州地图轮廓 - 简化版 -->
+                            <path class="map-outline" d="M100,100 L700,100 L700,500 L100,500 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            <!-- 广州主要河流 - 简化珠江 -->
+                            <path class="river" d="M100,300 Q400,250 700,350" fill="none" stroke="#a5d7f7" stroke-width="10"></path>
+                            
+                            <!-- 景点标记 -->
+                            <g class="map-marker" id="marker-gz-tower" data-category="attraction">
+                                <circle cx="400" cy="250" r="10" fill="#e74c3c"></circle>
+                                <text x="420" y="255" font-size="14">广州塔</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-shamian" data-category="attraction">
+                                <circle cx="250" cy="320" r="10" fill="#e74c3c"></circle>
+                                <text x="270" y="325" font-size="14">沙面岛</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-pearlriver" data-category="attraction">
+                                <circle cx="350" cy="330" r="10" fill="#e74c3c"></circle>
+                                <text x="370" y="335" font-size="14">珠江夜游</text>
+                            </g>
+                            
+                            <!-- 餐厅标记 -->
+                            <g class="map-marker" id="marker-chentianji" data-category="restaurant">
+                                <circle cx="300" cy="280" r="8" fill="#3498db"></circle>
+                                <text x="320" y="285" font-size="12">陈添记</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-bingsheng" data-category="restaurant">
+                                <circle cx="450" cy="290" r="8" fill="#3498db"></circle>
+                                <text x="470" y="295" font-size="12">炳胜品味</text>
+                            </g>
+                            
+                            <!-- 住宿标记 -->
+                            <g class="map-marker" id="marker-hotel-day1" data-category="hotel">
+                                <circle cx="420" cy="200" r="8" fill="#2ecc71"></circle>
+                                <text x="440" y="205" font-size="12">天河区酒店</text>
+                            </g>
+                            
+                            <!-- 推荐路线 -->
+                            <path class="route-path" d="M420,200 L400,250 L300,280 L250,320 L350,330 L450,290 L420,200" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Day 2 地图 -->
+                    <div class="map-svg" id="day2-map" style="display: none;">
+                        <svg width="100%" height="100%" viewBox="0 0 800 600">
+                            <!-- 广州地图轮廓 - 简化版 -->
+                            <path class="map-outline" d="M100,100 L700,100 L700,500 L100,500 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            <!-- 广州主要河流 - 简化珠江 -->
+                            <path class="river" d="M100,300 Q400,250 700,350" fill="none" stroke="#a5d7f7" stroke-width="10"></path>
+                            
+                            <!-- 景点标记 -->
+                            <g class="map-marker" id="marker-chenfamily" data-category="attraction">
+                                <circle cx="250" cy="250" r="10" fill="#e74c3c"></circle>
+                                <text x="270" y="255" font-size="14">陈家祠</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-shangxiajiu" data-category="attraction">
+                                <circle cx="300" cy="300" r="10" fill="#e74c3c"></circle>
+                                <text x="320" y="305" font-size="14">上下九步行街</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-beijinglu" data-category="attraction">
+                                <circle cx="450" cy="320" r="10" fill="#e74c3c"></circle>
+                                <text x="470" y="325" font-size="14">北京路步行街</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-gzmuseum" data-category="attraction">
+                                <circle cx="490" cy="280" r="10" fill="#e74c3c"></circle>
+                                <text x="510" y="285" font-size="14">广州博物馆</text>
+                            </g>
+                            
+                            <!-- 餐厅标记 -->
+                            <g class="map-marker" id="marker-lianxiang" data-category="restaurant">
+                                <circle cx="270" cy="220" r="8" fill="#3498db"></circle>
+                                <text x="290" y="225" font-size="12">莲香楼</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-panxi" data-category="restaurant">
+                                <circle cx="350" cy="280" r="8" fill="#3498db"></circle>
+                                <text x="370" y="285" font-size="12">泮溪酒家</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-guangzhourest" data-category="restaurant">
+                                <circle cx="430" cy="350" r="8" fill="#3498db"></circle>
+                                <text x="450" y="355" font-size="12">广州酒家</text>
+                            </g>
+                            
+                            <!-- 住宿标记 -->
+                            <g class="map-marker" id="marker-hotel-day2" data-category="hotel">
+                                <circle cx="420" cy="200" r="8" fill="#2ecc71"></circle>
+                                <text x="440" y="205" font-size="12">天河区酒店</text>
+                            </g>
+                            
+                            <!-- 推荐路线 -->
+                            <path class="route-path" d="M420,200 L270,220 L250,250 L300,300 L350,280 L450,320 L490,280 L430,350 L420,200" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5"></path>
+                        </svg>
+                    </div>
+                    
+                    <!-- Day 3 地图 -->
+                    <div class="map-svg" id="day3-map" style="display: none;">
+                        <svg width="100%" height="100%" viewBox="0 0 800 600">
+                            <!-- 中山地图轮廓 - 简化版 -->
+                            <path class="map-outline" d="M150,150 L650,150 L650,450 L150,450 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            
+                            <!-- 中山主要河流简化 -->
+                            <path class="river" d="M200,300 Q400,320 600,280" fill="none" stroke="#a5d7f7" stroke-width="8"></path>
+                            
+                            <!-- 景点标记 -->
+                            <g class="map-marker" id="marker-sunhome" data-category="attraction">
+                                <circle cx="350" cy="280" r="10" fill="#e74c3c"></circle>
+                                <text x="370" y="285" font-size="14">孙中山故居</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-sunmemorial" data-category="attraction">
+                                <circle cx="400" cy="250" r="10" fill="#e74c3c"></circle>
+                                <text x="420" y="255" font-size="14">孙中山纪念堂</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-cuiheng" data-category="attraction">
+                                <circle cx="320" cy="320" r="10" fill="#e74c3c"></circle>
+                                <text x="340" y="325" font-size="14">翠亨村</text>
+                            </g>
+                            
+                            <!-- 餐厅标记 -->
+                            <g class="map-marker" id="marker-cuihengrest" data-category="restaurant">
+                                <circle cx="360" cy="320" r="8" fill="#3498db"></circle>
+                                <text x="380" y="325" font-size="12">翠亨邨餐厅</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-nanyuan" data-category="restaurant">
+                                <circle cx="450" cy="300" r="8" fill="#3498db"></circle>
+                                <text x="470" y="305" font-size="12">南苑酒家</text>
+                            </g>
+                            
+                            <!-- 住宿标记 -->
+                            <g class="map-marker" id="marker-hotel-day3" data-category="hotel">
+                                <circle cx="480" cy="250" r="8" fill="#2ecc71"></circle>
+                                <text x="500" y="255" font-size="12">中山石岐区酒店</text>
+                            </g>
+                            
+                            <!-- 交通标记 -->
+                            <g class="map-marker" id="marker-zhongshan-station" data-category="transport">
+                                <circle cx="500" cy="350" r="8" fill="#f39c12"></circle>
+                                <text x="520" y="355" font-size="12">中山站</text>
+                            </g>
+                            
+                            <!-- 推荐路线 -->
+                            <path class="route-path" d="M500,350 L350,280 L320,320 L360,320 L400,250 L450,300 L480,250" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Day 4 地图 -->
+                    <div class="map-svg" id="day4-map" style="display: none;">
+                        <svg width="100%" height="100%" viewBox="0 0 800 600">
+                            <!-- 深圳地图轮廓 - 简化版 -->
+                            <path class="map-outline" d="M100,150 L700,150 L700,450 L100,450 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            
+                            <!-- 深圳海岸线简化 -->
+                            <path class="coast" d="M100,400 Q250,420 400,400 Q550,380 700,420" fill="none" stroke="#a5d7f7" stroke-width="8"></path>
+                            
+                            <!-- 景点标记 -->
+                            <g class="map-marker" id="marker-window-world" data-category="attraction">
+                                <circle cx="300" cy="280" r="10" fill="#e74c3c"></circle>
+                                <text x="320" y="285" font-size="14">深圳世界之窗</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-happy-valley" data-category="attraction">
+                                <circle cx="350" cy="260" r="10" fill="#e74c3c"></circle>
+                                <text x="370" y="265" font-size="14">欢乐谷</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-huaqiang" data-category="attraction">
+                                <circle cx="450" cy="300" r="10" fill="#e74c3c"></circle>
+                                <text x="470" y="305" font-size="14">华强北</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-seaworld" data-category="attraction">
+                                <circle cx="250" cy="370" r="10" fill="#e74c3c"></circle>
+                                <text x="270" y="375" font-size="14">海上世界</text>
+                            </g>
+                            
+                            <!-- 餐厅标记 -->
+                            <g class="map-marker" id="marker-window-food" data-category="restaurant">
+                                <circle cx="320" cy="300" r="8" fill="#3498db"></circle>
+                                <text x="340" y="305" font-size="12">世界之窗美食广场</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-shenzhen-bay" data-category="restaurant">
+                                <circle cx="400" cy="360" r="8" fill="#3498db"></circle>
+                                <text x="420" y="365" font-size="12">深圳湾海鲜餐厅</text>
+                            </g>
+                            
+                            <!-- 住宿标记 -->
+                            <g class="map-marker" id="marker-hotel-day4" data-category="hotel">
+                                <circle cx="280" cy="240" r="8" fill="#2ecc71"></circle>
+                                <text x="300" y="245" font-size="12">华侨城酒店</text>
+                            </g>
+                            
+                            <!-- 交通标记 -->
+                            <g class="map-marker" id="marker-shenzhen-north" data-category="transport">
+                                <circle cx="500" cy="200" r="8" fill="#f39c12"></circle>
+                                <text x="520" y="205" font-size="12">深圳北站</text>
+                            </g>
+                            
+                            <!-- 推荐路线 -->
+                            <path class="route-path" d="M500,200 L280,240 L300,280 L320,300 L350,260 L450,300 L250,370 L400,360 L280,240" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Day 5 地图 -->
+                    <div class="map-svg" id="day5-map" style="display: none;">
+                        <svg width="100%" height="100%" viewBox="0 0 800 600">
+                            <!-- 香港地图轮廓 - 简化版 -->
+                            <path class="map-outline-hk-island" d="M400,350 Q450,380 500,350 Q550,320 500,300 Q450,280 400,300 Q350,320 400,350 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            <path class="map-outline-kowloon" d="M300,250 L500,250 L450,300 L350,300 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            
+                            <!-- 维多利亚港 -->
+                            <path class="harbor" d="M350,300 Q400,330 450,300" fill="#a5d7f7" stroke="none"></path>
+                            
+                            <!-- 景点标记 -->
+                            <g class="map-marker" id="marker-victoria-harbor" data-category="attraction">
+                                <circle cx="400" cy="310" r="10" fill="#e74c3c"></circle>
+                                <text x="420" y="315" font-size="14">维多利亚港</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-tsim-promenade" data-category="attraction">
+                                <circle cx="380" cy="290" r="10" fill="#e74c3c"></circle>
+                                <text x="400" y="295" font-size="14">尖沙咀海滨长廊</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-avenue-stars" data-category="attraction">
+                                <circle cx="410" cy="280" r="10" fill="#e74c3c"></circle>
+                                <text x="430" y="285" font-size="14">星光大道</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-mongkok" data-category="attraction">
+                                <circle cx="350" cy="220" r="10" fill="#e74c3c"></circle>
+                                <text x="370" y="225" font-size="14">旺角购物区</text>
+                            </g>
+                            
+                            <!-- 餐厅标记 -->
+                            <g class="map-marker" id="marker-dimsum" data-category="restaurant">
+                                <circle cx="330" cy="270" r="8" fill="#3498db"></circle>
+                                <text x="350" y="275" font-size="12">添好运点心</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-yung-kee" data-category="restaurant">
+                                <circle cx="450" cy="330" r="8" fill="#3498db"></circle>
+                                <text x="470" y="335" font-size="12">鏞记酒家</text>
+                            </g>
+                            
+                            <!-- 住宿标记 -->
+                            <g class="map-marker" id="marker-hotel-day5" data-category="hotel">
+                                <circle cx="370" cy="260" r="8" fill="#2ecc71"></circle>
+                                <text x="390" y="265" font-size="12">尖沙咀酒店</text>
+                            </g>
+                            
+                            <!-- 交通标记 -->
+                            <g class="map-marker" id="marker-futian-port" data-category="transport">
+                                <circle cx="300" cy="200" r="8" fill="#f39c12"></circle>
+                                <text x="320" y="205" font-size="12">福田口岸</text>
+                            </g>
+                            
+                            <!-- 推荐路线 -->
+                            <path class="route-path" d="M300,200 L370,260 L330,270 L380,290 L410,280 L400,310 L350,220 L450,330 L370,260" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Day 6 地图 -->
+                    <div class="map-svg" id="day6-map" style="display: none;">
+                        <svg width="100%" height="100%" viewBox="0 0 800 600">
+                            <!-- 香港地图轮廓 - 简化版 -->
+                            <path class="map-outline-hk-island" d="M400,350 Q450,380 500,350 Q550,320 500,300 Q450,280 400,300 Q350,320 400,350 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            <path class="map-outline-kowloon" d="M300,250 L500,250 L450,300 L350,300 Z" fill="#f0f0f0" stroke="#ccc" stroke-width="2"></path>
+                            
+                            <!-- 维多利亚港 -->
+                            <path class="harbor" d="M350,300 Q400,330 450,300" fill="#a5d7f7" stroke="none"></path>
+                            
+                            <!-- 景点标记 -->
+                            <g class="map-marker" id="marker-victoria-peak" data-category="attraction">
+                                <circle cx="430" cy="320" r="10" fill="#e74c3c"></circle>
+                                <text x="450" y="325" font-size="14">太平山顶</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-sky-terrace" data-category="attraction">
+                                <circle cx="450" cy="330" r="10" fill="#e74c3c"></circle>
+                                <text x="470" y="335" font-size="14">凌霄阁摩天台</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-central" data-category="attraction">
+                                <circle cx="420" cy="340" r="10" fill="#e74c3c"></circle>
+                                <text x="440" y="345" font-size="14">中环</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-lan-kwai-fong" data-category="attraction">
+                                <circle cx="410" cy="350" r="10" fill="#e74c3c"></circle>
+                                <text x="430" y="355" font-size="14">兰桂坊</text>
+                            </g>
+                            
+                            <!-- 餐厅标记 -->
+                            <g class="map-marker" id="marker-cafe-australia" data-category="restaurant">
+                                <circle cx="390" cy="320" r="8" fill="#3498db"></circle>
+                                <text x="410" y="325" font-size="12">澳洲牛奶公司</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-peak-restaurant" data-category="restaurant">
+                                <circle cx="460" cy="310" r="8" fill="#3498db"></circle>
+                                <text x="480" y="315" font-size="12">太平山顶餐厅</text>
+                            </g>
+                            
+                            <g class="map-marker" id="marker-lan-kwai-food" data-category="restaurant">
+                                <circle cx="400" cy="360" r="8" fill="#3498db"></circle>
+                                <text x="420" y="365" font-size="12">兰桂坊美食</text>
+                            </g>
+                            
+                            <!-- 住宿标记 -->
+                            <g class="map-marker" id="marker-hotel-day6" data-category="hotel">
+                                <circle cx="370" cy="260" r="8" fill="#2ecc71"></circle>
+                                <text x="390" y="265" font-size="12">尖沙咀酒店</text>
+                            </g>
+                            
+                            <!-- 交通标记 -->
+                            <g class="map-marker" id="marker-peak-tram" data-category="transport">
+                                <circle cx="410" cy="330" r="8" fill="#f39c12"></circle>
+                                <text x="430" y="335" font-size="12">山顶缆车站</text>
+                            </g>
+                            
+                            <!-- 推荐路线 -->
+                            <path class="route-path" d="M370,260 L390,320 L410,330 L430,320 L450,330 L460,310 L420,340 L410,350 L400,360" fill="none" stroke="#9b59b6" stroke-width="3" stroke-dasharray="5,5"></path>
+                        </svg>
+                    </div>
+
+                    <div class="map-controls">
+                        <div class="map-control-btn zoom-in"><i class="fas fa-plus"></i></div>
+                        <div class="map-control-btn zoom-out"><i class="fas fa-minus"></i></div>
+                        <div class="map-control-btn zoom-reset"><i class="fas fa-undo"></i></div>
+                    </div>
+
+                    <div class="map-filters">
+                        <div class="map-filter active" data-category="all">全部</div>
+                        <div class="map-filter" data-category="attraction">景点</div>
+                        <div class="map-filter" data-category="restaurant">餐厅</div>
+                        <div class="map-filter" data-category="hotel">住宿</div>
+                    </div>
+                </div>
+
+                <div class="timeline-container">
+                    <!-- Day 1 时间线 -->
+                    <div class="timeline" id="day1-timeline" style="display: block;">
+                        <div class="timeline-item active" data-marker-id="marker-hotel-day1">
+                            <div class="timeline-time">09:00 - 10:00</div>
+                            <div class="timeline-title">从酒店出发</div>
+                            <div class="timeline-desc">整理行装，准备一天的行程</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐地铁3号线前往广州塔站（约20分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-gz-tower">
+                            <div class="timeline-time">10:00 - 12:30</div>
+                            <div class="timeline-title">广州塔</div>
+                            <div class="timeline-desc">登上488米高的观景台，俯瞰全城美景，体验世界最高的摩天轮</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往地铁站（约5分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-chentianji">
+                            <div class="timeline-time">12:30 - 14:00</div>
+                            <div class="timeline-title">陈添记午餐</div>
+                            <div class="timeline-desc">品尝正宗的广州煲仔饭，补充能量</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐地铁前往黄沙站（约30分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-shamian">
+                            <div class="timeline-time">14:00 - 17:00</div>
+                            <div class="timeline-title">沙面岛</div>
+                            <div class="timeline-desc">漫步欧式风情街区，欣赏殖民时期建筑，拍摄美照</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行至珠江游船码头（约15分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-pearlriver">
+                            <div class="timeline-time">19:00 - 21:00</div>
+                            <div class="timeline-title">珠江夜游</div>
+                            <div class="timeline-desc">乘船游览珠江，欣赏两岸夜景和灯光秀</div>
+                            <div class="timeline-transport"><i class="fas fa-taxi"></i> 打车返回酒店（约20分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-bingsheng">
+                            <div class="timeline-time">21:00 - 22:30</div>
+                            <div class="timeline-title">炳胜品味晚餐</div>
+                            <div class="timeline-desc">享用特色顺德菜，品尝著名的脆皮烧鹅</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行返回酒店（约10分钟）</div>
+                        </div>
+                    </div>
+
+                    <!-- Day 2 时间线 -->
+                    <div class="timeline" id="day2-timeline" style="display: none;">
+                        <div class="timeline-item active" data-marker-id="marker-hotel-day2">
+                            <div class="timeline-time">08:30 - 09:30</div>
+                            <div class="timeline-title">从酒店出发</div>
+                            <div class="timeline-desc">准备开始第二天的广州文化之旅</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐地铁前往莲香楼（约25分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-lianxiang">
+                            <div class="timeline-time">09:30 - 10:30</div>
+                            <div class="timeline-title">莲香楼早茶</div>
+                            <div class="timeline-desc">在百年老店品尝正宗广式早茶，体验广州茶文化</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往陈家祠（约15分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-chenfamily">
+                            <div class="timeline-time">10:45 - 12:15</div>
+                            <div class="timeline-title">陈家祠</div>
+                            <div class="timeline-desc">欣赏精美雕刻与岭南建筑艺术，了解广州传统民居文化</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往上下九步行街（约10分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-shangxiajiu">
+                            <div class="timeline-time">12:15 - 13:45</div>
+                            <div class="timeline-title">上下九步行街</div>
+                            <div class="timeline-desc">探索传统商业街，品尝各种小吃，购买特色商品</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往泮溪酒家（约15分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-panxi">
+                            <div class="timeline-time">14:00 - 15:30</div>
+                            <div class="timeline-title">泮溪酒家午餐</div>
+                            <div class="timeline-desc">在百年老字号享用正宗粤菜，建议尝试烧鹅和各种点心</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐地铁前往北京路步行街（约25分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-beijinglu">
+                            <div class="timeline-time">16:00 - 17:30</div>
+                            <div class="timeline-title">北京路步行街</div>
+                            <div class="timeline-desc">游览广州最古老的商业街，参观千年古道遗迹，购物休闲</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往广州博物馆（约10分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-gzmuseum">
+                            <div class="timeline-time">17:40 - 19:00</div>
+                            <div class="timeline-title">广州博物馆</div>
+                            <div class="timeline-desc">了解广州历史文化，欣赏城市变迁和岭南文化展览</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往广州酒家（约15分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-guangzhourest">
+                            <div class="timeline-time">19:15 - 21:00</div>
+                            <div class="timeline-title">广州酒家晚餐</div>
+                            <div class="timeline-desc">在老字号餐厅享用地道粤菜，推荐白切鸡和蜜汁叉烧</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐地铁返回酒店（约30分钟）</div>
+                        </div>
+                    </div>
+
+                    <!-- Day 3 时间线 -->
+                    <div class="timeline" id="day3-timeline" style="display: none;">
+                        <div class="timeline-item active" data-marker-id="marker-zhongshan-station">
+                            <div class="timeline-time">08:30 - 10:00</div>
+                            <div class="timeline-title">广州前往中山</div>
+                            <div class="timeline-desc">从广州南站乘坐城际轻轨前往中山站</div>
+                            <div class="timeline-transport"><i class="fas fa-train"></i> 城际轻轨（约50分钟，票价约¥50）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-zhongshan-station">
+                            <div class="timeline-time">10:00 - 10:30</div>
+                            <div class="timeline-title">中山站集合</div>
+                            <div class="timeline-desc">抵达中山站，准备前往孙中山故居</div>
+                            <div class="timeline-transport"><i class="fas fa-bus"></i> 乘坐公交车前往孙中山故居（约45分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-sunhome">
+                            <div class="timeline-time">11:15 - 13:00</div>
+                            <div class="timeline-title">孙中山故居纪念馆</div>
+                            <div class="timeline-desc">参观孙中山先生的出生地和故居，了解其生平事迹</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往翠亨村（约10分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-cuiheng">
+                            <div class="timeline-time">13:10 - 14:00</div>
+                            <div class="timeline-title">翠亨村</div>
+                            <div class="timeline-desc">参观保存完好的岭南古村落，感受孙中山先生成长的环境</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往翠亨邨餐厅（约5分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-cuihengrest">
+                            <div class="timeline-time">14:00 - 15:30</div>
+                            <div class="timeline-title">翠亨邨餐厅午餐</div>
+                            <div class="timeline-desc">品尝正宗中山菜，推荐尝试杏坛鱼饼和当地特色菜肴</div>
+                            <div class="timeline-transport"><i class="fas fa-bus"></i> 乘坐公交车前往孙中山纪念堂（约30分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-sunmemorial">
+                            <div class="timeline-time">16:00 - 17:30</div>
+                            <div class="timeline-title">孙中山纪念堂</div>
+                            <div class="timeline-desc">参观纪念堂及展览，进一步了解孙中山先生的思想与贡献</div>
+                            <div class="timeline-transport"><i class="fas fa-taxi"></i> 打车前往南苑酒家（约15分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-nanyuan">
+                            <div class="timeline-time">17:45 - 19:15</div>
+                            <div class="timeline-title">南苑酒家晚餐</div>
+                            <div class="timeline-desc">享用传统粤菜晚餐，补充一天游览的能量</div>
+                            <div class="timeline-transport"><i class="fas fa-taxi"></i> 打车前往酒店（约15分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-hotel-day3">
+                            <div class="timeline-time">19:30 - 21:00</div>
+                            <div class="timeline-title">入住中山酒店</div>
+                            <div class="timeline-desc">在石岐区酒店休息，为明天前往深圳做准备</div>
+                            <div class="timeline-transport"><i class="fas fa-bed"></i> 休息与调整</div>
+                        </div>
+                    </div>
+
+                    <!-- Day 4 时间线 -->
+                    <div class="timeline" id="day4-timeline" style="display: none;">
+                        <div class="timeline-item active" data-marker-id="marker-shenzhen-north">
+                            <div class="timeline-time">09:00 - 10:30</div>
+                            <div class="timeline-title">中山前往深圳</div>
+                            <div class="timeline-desc">从中山站乘坐城际轻轨前往深圳北站</div>
+                            <div class="timeline-transport"><i class="fas fa-train"></i> 城际轻轨（约1.5小时，票价约¥70）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-shenzhen-north">
+                            <div class="timeline-time">10:30 - 11:30</div>
+                            <div class="timeline-title">深圳北站</div>
+                            <div class="timeline-desc">抵达深圳北站，准备前往华侨城</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐地铁前往世界之窗站（约40分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-hotel-day4">
+                            <div class="timeline-time">11:30 - 12:30</div>
+                            <div class="timeline-title">办理酒店入住</div>
+                            <div class="timeline-desc">抵达华侨城酒店，办理入住手续，放置行李</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往世界之窗（约10分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-window-food">
+                            <div class="timeline-time">12:30 - 13:30</div>
+                            <div class="timeline-title">世界之窗美食广场午餐</div>
+                            <div class="timeline-desc">在美食广场享用多国美食，为下午游览做准备</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行进入世界之窗（约5分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-window-world">
+                            <div class="timeline-time">13:30 - 17:30</div>
+                            <div class="timeline-title">深圳世界之窗</div>
+                            <div class="timeline-desc">游览微缩景观公园，体验世界各地著名建筑和文化景点</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 游览完毕可选择前往欢乐谷（约10分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-happy-valley">
+                            <div class="timeline-time">17:30 - 18:30</div>
+                            <div class="timeline-title">欢乐谷外围</div>
+                            <div class="timeline-desc">游览欢乐谷外围商业区，体验主题乐园氛围</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐地铁前往华强北（约30分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-huaqiang">
+                            <div class="timeline-time">19:00 - 20:00</div>
+                            <div class="timeline-title">华强北</div>
+                            <div class="timeline-desc">参观亚洲最大电子市场，体验深圳科技创新的活力</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐地铁前往海上世界（约40分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-seaworld">
+                            <div class="timeline-time">20:40 - 21:40</div>
+                            <div class="timeline-title">海上世界</div>
+                            <div class="timeline-desc">体验深圳夜生活，欣赏海滨夜景</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往深圳湾海鲜餐厅（约15分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-shenzhen-bay">
+                            <div class="timeline-time">21:45 - 23:00</div>
+                            <div class="timeline-title">深圳湾海鲜餐厅晚餐</div>
+                            <div class="timeline-desc">品尝新鲜粤式海鲜，结束一天的行程</div>
+                            <div class="timeline-transport"><i class="fas fa-taxi"></i> 打车返回酒店（约20分钟）</div>
+                        </div>
+                    </div>
+
+                    <!-- Day 5 时间线 -->
+                    <div class="timeline" id="day5-timeline" style="display: none;">
+                        <div class="timeline-item active" data-marker-id="marker-futian-port">
+                            <div class="timeline-time">09:00 - 10:30</div>
+                            <div class="timeline-title">深圳过关到香港</div>
+                            <div class="timeline-desc">从深圳福田口岸过关，进入香港</div>
+                            <div class="timeline-transport"><i class="fas fa-passport"></i> 通过口岸过关（约30-45分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-futian-port">
+                            <div class="timeline-time">10:30 - 11:15</div>
+                            <div class="timeline-title">前往尖沙咀</div>
+                            <div class="timeline-desc">通过香港港铁前往尖沙咀地区</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐港铁（约30分钟，票价约HK$50）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-hotel-day5">
+                            <div class="timeline-time">11:15 - 12:00</div>
+                            <div class="timeline-title">办理酒店入住</div>
+                            <div class="timeline-desc">抵达尖沙咀酒店，办理入住手续，安顿行李</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往添好运点心（约10分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-dimsum">
+                            <div class="timeline-time">12:00 - 13:30</div>
+                            <div class="timeline-title">添好运点心午餐</div>
+                            <div class="timeline-desc">在米其林星级点心餐厅享用地道港式点心</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往尖沙咀海滨长廊（约15分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-tsim-promenade">
+                            <div class="timeline-time">13:45 - 15:15</div>
+                            <div class="timeline-title">尖沙咀海滨长廊</div>
+                            <div class="timeline-desc">漫步海滨，欣赏维多利亚港和香港岛的壮观景色</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往星光大道（约10分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-avenue-stars">
+                            <div class="timeline-time">15:25 - 16:30</div>
+                            <div class="timeline-title">星光大道</div>
+                            <div class="timeline-desc">参观香港电影明星的手印，拍摄维港美景</div>
+                            <div class="timeline-transport"><i class="fas fa-ferry"></i> 乘坐天星小轮前往中环（约10分钟，票价约HK$2.5）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-victoria-harbor">
+                            <div class="timeline-time">16:40 - 18:30</div>
+                            <div class="timeline-title">维多利亚港游览</div>
+                            <div class="timeline-desc">游览维多利亚港，等待日落，准备观看晚上8点的"幻彩咏香江"灯光秀</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐港铁前往旺角（约15分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-mongkok">
+                            <div class="timeline-time">18:45 - 20:30</div>
+                            <div class="timeline-title">旺角购物区</div>
+                            <div class="timeline-desc">体验香港最热闹的购物区，逛女人街、波鞋街等特色商业街</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐港铁返回中环（约20分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-yung-kee">
+                            <div class="timeline-time">20:45 - 22:15</div>
+                            <div class="timeline-title">鏞记酒家晚餐</div>
+                            <div class="timeline-desc">在老字号粤菜餐厅享用晚餐，品尝招牌烧鹅</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐港铁返回酒店（约20分钟）</div>
+                        </div>
+                    </div>
+
+                    <!-- Day 6 时间线 -->
+                    <div class="timeline" id="day6-timeline" style="display: none;">
+                        <div class="timeline-item active" data-marker-id="marker-hotel-day6">
+                            <div class="timeline-time">08:30 - 09:30</div>
+                            <div class="timeline-title">酒店早餐</div>
+                            <div class="timeline-desc">在酒店享用早餐，准备香港最后一天的行程</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐港铁前往中环（约15分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-cafe-australia">
+                            <div class="timeline-time">09:45 - 10:45</div>
+                            <div class="timeline-title">澳洲牛奶公司</div>
+                            <div class="timeline-desc">品尝香港经典的蛋挞和奶茶，补充能量</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往山顶缆车站（约15分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-peak-tram">
+                            <div class="timeline-time">11:00 - 11:30</div>
+                            <div class="timeline-title">乘坐山顶缆车</div>
+                            <div class="timeline-desc">体验香港经典的山顶缆车，沿途欣赏香港风景</div>
+                            <div class="timeline-transport"><i class="fas fa-tram"></i> 缆车上山（约7分钟，票价往返HK$99）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-victoria-peak">
+                            <div class="timeline-time">11:30 - 12:30</div>
+                            <div class="timeline-title">太平山顶</div>
+                            <div class="timeline-desc">在香港最高点俯瞰维多利亚港和香港岛全景</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往凌霄阁摩天台（约5分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-sky-terrace">
+                            <div class="timeline-time">12:30 - 13:30</div>
+                            <div class="timeline-title">凌霄阁摩天台</div>
+                            <div class="timeline-desc">在428米高的摩天台欣赏360度全景，拍照留念</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往太平山顶餐厅（约10分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-peak-restaurant">
+                            <div class="timeline-time">13:30 - 15:00</div>
+                            <div class="timeline-title">太平山顶餐厅午餐</div>
+                            <div class="timeline-desc">边用餐边欣赏美景，品尝特色菜肴</div>
+                            <div class="timeline-transport"><i class="fas fa-tram"></i> 乘坐缆车下山返回中环（约7分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-central">
+                            <div class="timeline-time">15:15 - 17:30</div>
+                            <div class="timeline-title">中环游览</div>
+                            <div class="timeline-desc">参观中环标志性建筑，体验金融中心的繁忙氛围</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往兰桂坊（约10分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-lan-kwai-fong">
+                            <div class="timeline-time">17:30 - 19:30</div>
+                            <div class="timeline-title">兰桂坊</div>
+                            <div class="timeline-desc">参观香港著名的酒吧街区，体验国际化的夜生活文化</div>
+                            <div class="timeline-transport"><i class="fas fa-walking"></i> 步行前往兰桂坊餐厅（约5分钟）</div>
+                        </div>
+                        
+                        <div class="timeline-item" data-marker-id="marker-lan-kwai-food">
+                            <div class="timeline-time">19:30 - 21:30</div>
+                            <div class="timeline-title">兰桂坊美食晚餐</div>
+                            <div class="timeline-desc">选择多国料理餐厅享用晚餐，结束香港之行</div>
+                            <div class="timeline-transport"><i class="fas fa-subway"></i> 乘坐港铁返回酒店或前往机场（约30-60分钟）</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="旅游Logo">
+                    <span>粤港之旅</span>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="index.html">行程概览</a></li>
+                        <li><a href="map.html">旅行地图</a></li>
+                        <li><a href="gallery.html">景点图鉴</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2023 粤港之旅 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
